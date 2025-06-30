@@ -1,0 +1,7 @@
+application myChemFoam;
+startTime 0;
+endTime 0.1;
+deltaT 1e-5;
+writeInterval 0.01;
+adjustTimeStep off;
+maxDeltaT 1;

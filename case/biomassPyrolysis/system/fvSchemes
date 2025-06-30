@@ -1,0 +1,19 @@
+ddtSchemes
+{
+    default         Euler;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+SnGradSchemes
+{
+    default         corrected;
+}
