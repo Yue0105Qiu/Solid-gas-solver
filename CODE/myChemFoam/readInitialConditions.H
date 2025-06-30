@@ -20,6 +20,14 @@
     scalarList Y0(nSpecie, 0.0);
     scalarList X0(nSpecie, 0.0);
 
+    wordList solidSpecies;
+    if (initialConditions.found("solidSpecies"))
+    {
+        initialConditions.lookup("solidSpecies") >> solidSpecies;
+    }
+
+    isSolid.setSize(nSpecie, false);
+
     dictionary fractions(initialConditions.subDict("fractions"));
     if (fractionBasis == "mole")
     {
@@ -68,6 +76,26 @@
         forAll(Y, i)
         {
             X0[i] = Y0[i]*mw/W[i];
+        }
+    }
+
+    forAll(solidSpecies, si)
+    {
+        bool found = false;
+        forAll(Y, i)
+        {
+            if (Y[i].name() == solidSpecies[si])
+            {
+                isSolid[i] = true;
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            FatalErrorInFunction
+                << "Solid specie " << solidSpecies[si] << " not found in mixture"
+                << exit(FatalError);
         }
     }
 
