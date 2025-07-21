@@ -20,21 +20,43 @@
     scalarList Y0(nSpecie, 0.0);
     scalarList X0(nSpecie, 0.0);
 
-    wordList solidSpecies(0);
+    // The initial composition is provided via two dictionaries
+    // `solidSpecies` and `gasSpecies`.  Each dictionary maps specie
+    // names to their initial fractions.  The old `fractions` format is
+    // no longer supported.
+
+    dictionary solidFractions;
+    dictionary gasFractions;
+
     if (initialConditions.found("solidSpecies"))
     {
-        initialConditions.lookup("solidSpecies") >> solidSpecies;
+        solidFractions = initialConditions.subDict("solidSpecies");
+    }
+
+    if (initialConditions.found("gasSpecies"))
+    {
+        gasFractions = initialConditions.subDict("gasSpecies");
     }
 
     isSolid.setSize(nSpecie, false);
-    forAll(solidSpecies, si)
+
+    forAll(Y, i)
     {
+        const word& name = Y[i].name();
+        if (solidFractions.found(name))
+        {
+            isSolid[i] = true;
+        }
+    }
+
+    forAllConstIter(dictionary, solidFractions, iter)
+    {
+        const word specName(iter().keyword());
         bool found = false;
         forAll(Y, i)
         {
-            if (Y[i].name() == solidSpecies[si])
+            if (specName == Y[i].name())
             {
-                isSolid[i] = true;
                 found = true;
                 break;
             }
@@ -42,21 +64,44 @@
         if (!found)
         {
             FatalErrorInFunction
-                << "Solid specie " << solidSpecies[si] << " not found in mixture"
+                << "Solid specie " << specName << " not found in mixture"
+                << exit(FatalError);
+        }
+    }
+
+    forAllConstIter(dictionary, gasFractions, iter)
+    {
+        const word specName(iter().keyword());
+        bool found = false;
+        forAll(Y, i)
+        {
+            if (specName == Y[i].name())
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            FatalErrorInFunction
+                << "Gas specie " << specName << " not found in mixture"
                 << exit(FatalError);
         }
     }
 
 
-    dictionary fractions(initialConditions.subDict("fractions"));
     if (fractionBasis == "mole") // mole fraction
     {
         forAll(Y, i)
         {
             const word& name = Y[i].name();
-            if (fractions.found(name))
+            if (solidFractions.found(name))
             {
-                X0[i] = readScalar(fractions.lookup(name));
+                X0[i] = readScalar(solidFractions.lookup(name));
+            }
+            else if (gasFractions.found(name))
+            {
+                X0[i] = readScalar(gasFractions.lookup(name));
             }
         }
 
@@ -78,9 +123,13 @@
         forAll(Y, i)
         {
             const word& name = Y[i].name();
-            if (fractions.found(name))
+            if (solidFractions.found(name))
             {
-                Y0[i] = readScalar(fractions.lookup(name));
+                Y0[i] = readScalar(solidFractions.lookup(name));
+            }
+            else if (gasFractions.found(name))
+            {
+                Y0[i] = readScalar(gasFractions.lookup(name));
             }
         }
 

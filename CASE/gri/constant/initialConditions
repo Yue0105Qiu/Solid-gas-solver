@@ -19,7 +19,12 @@ constantProperty pressure;
 
 fractionBasis   mole;
 
-fractions
+
+solidSpecies
+{
+}
+
+gasSpecies
 {
     CH4             0.5;
     N2              3.76;
