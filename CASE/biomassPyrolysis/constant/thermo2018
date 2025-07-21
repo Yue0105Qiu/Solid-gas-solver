@@ -1,0 +1,857 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       dictionary;
+    location    "constant";
+    object      thermo.solid;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+CELL
+{
+	specie
+	{
+		molWeight	162.144;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		// Haseli
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-5.97E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               6;
+        H               10;
+        O               5;
+    }
+};
+
+GMSW
+{
+	specie
+	{
+		molWeight	132.117;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-5.99E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               5;
+        H               8;
+        O               4;
+    }
+};
+
+XYHW
+{
+	specie
+	{
+		molWeight	132.117;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-6.25E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               5;
+        H               8;
+        O               4;
+    }
+};
+
+XYGR
+{
+	specie
+	{
+		molWeight	132.117;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-6.41E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               5;
+        H               8;
+        O               4;
+    }
+};
+
+LIGC
+{
+	specie
+	{
+		molWeight	258.276;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-2.84E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               15;
+        H               14;
+        O               4;
+    }
+};
+
+LIGH
+{
+	specie
+	{
+		molWeight	436.463;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-3.78E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               22;
+        H               28;
+        O               9;
+    }
+};
+
+LIGO
+{
+	specie
+	{
+		molWeight	422.392;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-4.47E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               20;
+        H               22;
+        O               10;
+    }
+};
+
+TGL
+{
+	specie
+	{
+		molWeight	897.4292;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-1.77E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               57;
+        H               100;
+        O               7;
+    }
+};
+
+TANN
+{
+	specie
+	{
+		molWeight	304.2586718;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-3.87E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               15;
+        H               12;
+        O               7;
+    }
+};
+
+CELLA
+{
+	specie
+	{
+		molWeight	162.144;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-5.97E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               6;
+        H               10;
+        O               5;
+    }
+};
+
+HCE1
+{
+	specie
+	{
+		molWeight	132.117;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-5.75E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               5;
+        H               8;
+        O               4;
+    }
+};
+
+HCE2
+{
+	specie
+	{
+		molWeight	132.117;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-6.48E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               5;
+        H               8;
+        O               4;
+    }
+};
+
+LIGCC
+{
+	specie
+	{
+		molWeight	258.276553;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-1.99E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               15;
+        H               14;
+        O               4;
+    }
+};
+
+LIGOH
+{
+	specie
+	{
+		molWeight	378.3822654;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-3.61E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               19;
+        H               22;
+        O               8;
+    }
+};
+
+LIG
+{
+	specie
+	{
+		molWeight	208.2157;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-3.27E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               11;
+        H               12;
+        O               4;
+    }
+};
+
+ITANN
+{
+	specie
+	{
+		molWeight	164.1187718;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-4.33E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               8;
+        H               4;
+        O               4;
+    }
+};
+
+COH2S
+{
+	specie
+	{
+		molWeight	30.026452;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-1.14E+07;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               1;
+        H               2;
+        O               1;
+    }
+};
+
+CO2S
+{
+	specie
+	{
+		molWeight	44.01;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-7.07E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               1;
+        O               2;
+    }
+};
+
+COS
+{
+	specie
+	{
+		molWeight	28.0105;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-2.31E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               1;
+        O               1;
+    }
+};
+
+CH3OHS
+{
+	specie
+	{
+		molWeight	32.0424;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-6.34E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               1;
+        H               4;
+        O               1;
+    }
+};
+
+CH4S
+{
+	specie
+	{
+		molWeight	16.043;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-4.28E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               1;
+        H               4;
+    }
+};
+
+C2H4S
+{
+	specie
+	{
+		molWeight	28.0542;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			1.95E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               2;
+        H               4;
+    }
+};
+
+C6H5OHS
+{
+	specie
+	{
+		molWeight	94.1141;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-1.15E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               6;
+        H               6;
+        O               1;
+    }
+};
+
+CH2OS
+{
+	specie
+	{
+		molWeight	30.026488;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-6.29E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               1;
+        H               2;
+        O               1;
+    }
+};
+
+H2S
+{
+	specie
+	{
+		molWeight	2.01594;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			5.03E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        H               2;
+    }
+};
+
+C2H6S
+{
+	specie
+	{
+		molWeight	30.0701;
+	}
+	transport
+	{
+		kappa		0.73; //0.45;
+	}
+	thermodynamics
+	{
+		C0			1668.2741; //1647.014;
+		n0			0.364579; //0.253;
+		Tref		300;
+		Hf			-2.56E+06;
+	}
+	equationOfState
+	{
+		rho			1507;
+	}
+    elements
+    {
+        C               2;
+        H               6;
+    }
+};
+
+//-----------------------------------------------------------------
+CHAR
+{
+    specie
+    {
+        molWeight   12;
+    }
+    transport
+    {
+        kappa       0.1065; //0.3;
+    }
+    thermodynamics
+    {
+		// Gupta 1
+		/*C0          723.167;
+        n0			0.640;
+        Tref		300.0;
+        Hf          -15526.33;*/
+        // Haseli
+        C0          974.736497;
+        n0			0.781806;
+        Tref		300.0;
+        Hf          -15526.33;
+    }
+    equationOfState
+    {
+        rho         1379.34;
+    }
+    elements
+    {
+        C               1;
+    }
+};
+
+ASH
+{
+    specie
+    {
+        molWeight   12;
+    }
+    transport
+    {
+        kappa       1.2; //1.4;
+    }
+    thermodynamics
+    {
+        C0          800;
+        n0			0;
+        Tref		300.0;
+        Hf          0;
+    }
+    equationOfState
+    {
+        rho         1379.34;
+    }
+    elements
+    {
+        C               1;
+    }
+};
+
+WATER
+{
+    specie
+    {
+        molWeight   18.01534;
+    }
+    transport
+    {
+        kappa       0.4; //0.6;
+    }
+    thermodynamics
+    {
+        C0          4200;
+        n0			0;
+        Tref		300.0;
+        Hf          -15863300.0;
+    }
+    equationOfState
+    {
+        rho         1379.34;
+    }
+    elements
+    {
+        H               2;
+        O               1;
+    }
+};
+
+
+
+// ************************************************************************* //

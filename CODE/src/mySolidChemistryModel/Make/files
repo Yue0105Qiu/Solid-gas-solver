@@ -1,0 +1,7 @@
+myBasicSolidChemistryModel/myBasicSolidChemistryModel.C
+myBasicSolidChemistryModel/myBasicSolidChemistryModelNew.C
+myBasicSolidChemistryModel/myBasicSolidChemistryModels.C
+
+solidChemistrySolver/makeSolidChemistrySolvers.C
+
+LIB = $(FOAM_USER_LIBBIN)/libmySolidChemistryModel

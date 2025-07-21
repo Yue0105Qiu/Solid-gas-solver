@@ -23,27 +23,28 @@
 
     #include "createBaseFields.H"
 
-    Info<< "Reading thermophysical properties\n" << endl;
+    Info<< "Reading thermophysical properties for gas\n" << endl;
     autoPtr<rhoReactionThermo> pThermo(rhoReactionThermo::New(mesh));
-    rhoReactionThermo& thermo = pThermo();
-    thermo.validate(args.executable(), "h");
+    rhoReactionThermo& thermoG = pThermo();
+    thermoG.validate(args.executable(), "h");
 
     autoPtr<BasicChemistryModel<rhoReactionThermo>> pChemistry
     (
-        BasicChemistryModel<rhoReactionThermo>::New(thermo)
+        BasicChemistryModel<rhoReactionThermo>::New(thermoG)
     );
 
-    volScalarField rho
+
+    volScalarField rhoG
     (
         IOobject
         (
-            "rho",
+            "rhoG",
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        thermo.rho()
+        thermoG.rho()
     );
 
     volScalarField Rspecific
@@ -86,3 +87,29 @@
         << "Pressure [Pa]" << endl;
 
     boolList isSolid;
+
+    // Variables for solid phase
+    autoPtr<solidReactionThermo> pThermoS(solidReactionThermo::New(mesh));
+    solidReactionThermo& thermoS = pThermoS();
+    // thermoS.validate(args.executable(), "h");
+    autoPtr<myBasicChemistryModel<solidReactionThermo>> pChemistryS
+    (
+        myBasicChemistryModel<solidReactionThermo>::New(thermS)
+    );
+
+    // PtrList<volScalarField> QdotsSolid();
+    volScalarField rhoS
+    (
+        IOobject
+        (
+            "rhoS",
+            runTime.timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        thermoS.rho()
+    );
+
+
+

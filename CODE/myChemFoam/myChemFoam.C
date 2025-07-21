@@ -42,6 +42,11 @@ Description
 #include "cellModeller.H"
 #include "thermoTypeFunctions.H"
 
+
+#include "solidThermo.H"
+#include "fvOptions.H"
+#include "pressureControl.H"
+#include "myBasicSolidChemistryModel.H"
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 int main(int argc, char *argv[])
@@ -73,12 +78,34 @@ int main(int argc, char *argv[])
         runTime++;
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
-        #include "solveChemistry.H"
-        #include "YEqn.H"
-        #include "hEqn.H"
-        #include "pEqn.H"
 
-        #include "output.H"
+        #include "solveChemistry.H"
+        #include "rhoSolidEqn.H"
+        if (pimple.firstIter())
+		{
+			#include "rhoGasEqn.H"
+		}
+
+        #include "YEqn.H"
+        #include "TEqn.H"
+
+		// --- PISO loop
+		while (pimple.correct())
+		{
+			#include "pEqn.H"
+		}
+
+        if (pimple.finalIter())
+		{
+			rhoG = thermoG.rho();
+			rhoG.correctBoundaryConditions();
+			
+			rhoS = thermoS.rho();
+			rhoS.correctBoundaryConditions();
+			
+			#include "output.H"
+		}
+
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
             << "  ClockTime = " << runTime.elapsedClockTime() << " s"

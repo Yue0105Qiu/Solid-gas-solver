@@ -20,16 +20,36 @@
     scalarList Y0(nSpecie, 0.0);
     scalarList X0(nSpecie, 0.0);
 
-    wordList solidSpecies;
+    wordList solidSpecies(0);
     if (initialConditions.found("solidSpecies"))
     {
         initialConditions.lookup("solidSpecies") >> solidSpecies;
     }
 
     isSolid.setSize(nSpecie, false);
+    forAll(solidSpecies, si)
+    {
+        bool found = false;
+        forAll(Y, i)
+        {
+            if (Y[i].name() == solidSpecies[si])
+            {
+                isSolid[i] = true;
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            FatalErrorInFunction
+                << "Solid specie " << solidSpecies[si] << " not found in mixture"
+                << exit(FatalError);
+        }
+    }
+
 
     dictionary fractions(initialConditions.subDict("fractions"));
-    if (fractionBasis == "mole")
+    if (fractionBasis == "mole") // mole fraction
     {
         forAll(Y, i)
         {
@@ -79,25 +99,7 @@
         }
     }
 
-    forAll(solidSpecies, si)
-    {
-        bool found = false;
-        forAll(Y, i)
-        {
-            if (Y[i].name() == solidSpecies[si])
-            {
-                isSolid[i] = true;
-                found = true;
-                break;
-            }
-        }
-        if (!found)
-        {
-            FatalErrorInFunction
-                << "Solid specie " << solidSpecies[si] << " not found in mixture"
-                << exit(FatalError);
-        }
-    }
+
 
     const scalar h0 = ::h0(thermo, Y0, p[0], T0);
 

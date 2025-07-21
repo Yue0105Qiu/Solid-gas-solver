@@ -1,0 +1,15 @@
+solvers
+{
+    Yi
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-8;
+        relTol          0;
+    }
+}
+
+PISO
+{
+    nCorrectors 1;
+}

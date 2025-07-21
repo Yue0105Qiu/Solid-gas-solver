@@ -74,14 +74,14 @@ scalarList W(const rhoReactionThermo& thermo)
     {
         return W<constFluidHThermoPhysics>(thermo);
     }
-    else if (isA<reactingMixture<gasHPowerThermoPhysics>>(thermo))
-    {
-        return W<gasHPowerThermoPhysics>(thermo);
-    }
-    else if (isA<reactingMixture<constFluidHPowerThermoPhysics>>(thermo))
-    {
-        return W<constFluidHPowerThermoPhysics>(thermo);
-    }
+    // else if (isA<reactingMixture<gasHPowerThermoPhysics>>(thermo))
+    // {
+    //     return W<gasHPowerThermoPhysics>(thermo);
+    // }
+    // else if (isA<reactingMixture<constFluidHPowerThermoPhysics>>(thermo))
+    // {
+    //     return W<constFluidHPowerThermoPhysics>(thermo);
+    // }
     else
     {
         FatalErrorInFunction
@@ -110,14 +110,14 @@ scalar h0
     {
         return h0<constFluidHThermoPhysics>(thermo, Y, p, T);
     }
-    else if (isA<reactingMixture<gasHPowerThermoPhysics>>(thermo))
-    {
-        return h0<gasHPowerThermoPhysics>(thermo, Y, p, T);
-    }
-    else if (isA<reactingMixture<constFluidHPowerThermoPhysics>>(thermo))
-    {
-        return h0<constFluidHPowerThermoPhysics>(thermo, Y, p, T);
-    }
+    // else if (isA<reactingMixture<gasHPowerThermoPhysics>>(thermo))
+    // {
+    //     return h0<gasHPowerThermoPhysics>(thermo, Y, p, T);
+    // }
+    // else if (isA<reactingMixture<constFluidHPowerThermoPhysics>>(thermo))
+    // {
+    //     return h0<constFluidHPowerThermoPhysics>(thermo, Y, p, T);
+    // }
     else
     {
         FatalErrorInFunction

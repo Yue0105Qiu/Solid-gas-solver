@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "library directory: ${LIB_MOR}"
+
+
+echo -n "compiling mySolidSpecie ... "
+wmake $LIB_MOR/mySolidSpecie  &>> log.Allwmake
+echo "done!"
+
+echo -n "compiling myReactionThermo ... "
+wmake $LIB_MOR/myReactionThermo &>> log.Allwmake
+echo "done!"
+
+
+echo -n "compiling mySolidThermo ... "
+wmake $LIB_MOR/mySolidThermo &>> log.Allwmake
+echo "done!"
+
+echo -n "compiling mySolidChemistryModel ... "
+wmake $LIB_MOR/mySolidChemistryModel  &>> log.Allwmake
+echo "done!"

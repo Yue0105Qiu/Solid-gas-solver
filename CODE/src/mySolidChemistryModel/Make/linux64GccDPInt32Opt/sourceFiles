@@ -1,0 +1,5 @@
+SOURCE = \
+myBasicSolidChemistryModel/myBasicSolidChemistryModel.C \
+myBasicSolidChemistryModel/myBasicSolidChemistryModelNew.C \
+myBasicSolidChemistryModel/myBasicSolidChemistryModels.C \
+solidChemistrySolver/makeSolidChemistrySolvers.C 

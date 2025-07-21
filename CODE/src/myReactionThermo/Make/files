@@ -1,0 +1,4 @@
+chemistryReaders/chemistryReader/makeChemistryReaders.C
+
+
+LIB = $(FOAM_USER_LIBBIN)/libmyReactionThermophysicalModels

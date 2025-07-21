@@ -1,0 +1,410 @@
+elements        
+4
+(
+O
+H
+C
+N
+)
+;
+
+species
+(
+	ASH
+    CELL
+	GMSW
+	XYHW
+	XYGR
+	LIGC
+	LIGH
+	LIGO
+	TGL
+	TANN
+	CELLA
+	HCE1
+	HCE2
+	LIGCC
+	LIGOH
+	LIG
+	ITANN
+	COH2S
+	CO2S
+	COS
+	CH3OHS
+	CH4S
+	C2H4S
+	C6H5OHS
+	CH2OS
+	H2S
+	C2H6S
+	CHAR
+    WATER	//ACQUA
+);
+
+gaseousSpecies
+(
+    HCOOH
+	H2
+	H2O
+	CO
+	CO2
+	CHOCHO
+	CH2O
+	CH2OHCHO
+	CH2OHCH2CHO
+	CH3OH
+	CH3CHO
+	CH3CO2H
+	CH4
+	C2H3CHO
+	C2H4
+	C2H5OH
+	C2H5CHO
+	C2H6
+	C5H8O4
+	C6H5OH
+	C6H5OCH3
+	C6H6O3
+	C6H10O5
+	C24H28O4
+	FURFURAL
+	VANILLIN
+	CRESOL
+	MLINO
+	U2ME12
+	N2
+	O2
+);
+
+reactions
+{
+	reaction0
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CELL = CELLA";
+		A			1.50E+14;
+		beta		0;
+		Ta			23653.7493709109;
+		Tcrit		400;
+	}
+
+	reaction1
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CELLA = 0.1481CH2OHCHO + 0.0107CHOCHO + 0.0462CH3CHO + 0.1944C6H6O3 + 0.1254C2H5CHO + 0.0395CH3OH + 0.0278CH2O + 0.0846CO + 0.0086COS + 0.1167CO2 + 0.0016H2 + 0.1033H2O + 0.0093CH2OS + 0.0057HCOOH + 0.0228CH2OHCH2CHO + 0.0049CH4 + 0.0012H2S + 0.0489CHAR";
+		A			2.50E+06;
+		beta		0;
+		Ta			9612.48112732763;
+		Tcrit		400;
+	}
+
+	reaction2
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CELLA = 0ASH + C6H10O5";
+		A			3.30E+00;
+		beta		1;
+		Ta			5032.71263210871;
+		Tcrit		400;
+	}
+
+	reaction3
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CELL = 0.4944H2O + 0.4037CHAR + 0.0222COH2S + 0.0333CH2OS + 0.0432COS + 0.0016H2S + 0.0016H2";
+		A			5.00E+07;
+		beta		0;
+		Ta			15601.409159537;
+		Tcrit		400;
+	}
+
+	reaction4
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"GMSW = 0.7000HCE1 + 0.3000HCE2";
+		A			1.00E+10;
+		beta		0;
+		Ta			15601.409159537;
+		Tcrit		400;
+	}
+
+	reaction5
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"XYHW = 0.3500HCE1 + 0.6500HCE2";
+		A			1.25E+11;
+		beta		0;
+		Ta			15802.7176648213;
+		Tcrit		400;
+	}
+
+	reaction6
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"XYGR = 0.1200HCE1 + 0.8800HCE2";
+		A			1.25E+11;
+		beta		0;
+		Ta			15098.1378963261;
+		Tcrit		400;
+	}
+
+	reaction7
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"HCE1 = 0.2500C5H8O4 + 0.3068C6H10O5 + 0.1164FURFURAL + 0.1241C6H6O3 + 0.0300CO2 + 0.0121CH4 + 0.0736H2O + 0.0336CH2OHCH2CHO + 0.0439CHOCHO + 0.0003H2 + 0.0091CHAR";
+		A			1.60E+01;
+		beta		1;
+		Ta			6492.19929542023;
+		Tcrit		400;
+	}
+
+	reaction8
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"HCE1 = 0.0545H2O + 0.1299CO2 + 0.0174HCOOH + 0.1039CO + 0.0021COS + 0.1699CO2S + 0.0008H2S + 0.0909CH2O + 0.0977CH2OS + 0.0364CH4 + 0.0395CH4S + 0.0212C2H4 + 0.0159C2H4S + 0.0886CHAR + 0.0841COH2S + 0.0015H2 + 0.0455C2H6S";
+		A			3.00E-03;
+		beta		1;
+		Ta			1811.77654755913;
+		Tcrit		400;
+	}
+
+	reaction9
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"HCE2 = 0.0636CO + 0.1707CO2 + 0.0230CH4 + 0.0084H2 + 0.0076H2O + 0.0171C2H5OH + 0.0159CH2OHCHO + 0.0477CH3CO2H + 0.0061HCOOH + 0.1055FURFURAL + 0.0061CH4S + 0.0255CH3OHS + 0.0212C2H4S + 0.1499CO2S + 0.0409CH2OS + 0.0648CHAR + 0.0032H2S + 0.1773COH2S + 0.0455C2H6S";
+		A			7.00E+09;
+		beta		0;
+		Ta			15349.7735279316;
+		Tcrit		400;
+	}
+
+	reaction10
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIGH = 0.8669LIGOH + 0.0665C2H5CHO + 0.0257C2H4 + 0.0275CH2OHCHO + 0.0064CO + 0.0069C2H6";
+		A			6.70E+12;
+		beta		0;
+		Ta			18872.6723704077;
+		Tcrit		400;
+	}
+
+	reaction11
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIGO = 0.8958LIGOH + 0.1042CO2";
+		A			3.30E+08;
+		beta		0;
+		Ta			12833.4172118772;
+		Tcrit		400;
+	}
+
+	reaction12
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIGC = 0.3500LIGCC + 0.0589VANILLIN + 0.0419C6H5OCH3 + 0.0293C2H4 + 0.0698H2O + 0.0198CH2OS + 0.0465COH2S + 0.0256CH2O + 0.0228CO + 0.0170CO2 + 0.0224CH4S + 0.2721CHAR + 0.0233C2H6S + 0.0008H2S";
+		A			1.00E+11;
+		beta		0;
+		Ta			18721.6909914444;
+		Tcrit		400;
+	}
+
+	reaction13
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIGCC = 0.1473VANILLIN + 0.0628CRESOL + 0.0628C6H5OCH3 + 0.0814CH2OHCHO + 0.0488H2O + 0.0280CH4 + 0.0326C2H4 + 0.0055H2 + 0.1247CO + 0.0434COS + 0.3162CHAR + 0.0466C2H6";
+		A			1.00E+04;
+		beta		0;
+		Ta			12481.1273276296;
+		Tcrit		400;
+	}
+
+	reaction14
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIGOH = 0.4953LIG + 0.0476H2O + 0.0042CH4 + 0.0508CH3OH + 0.0254CH3OHS + 0.0058CO2 + 0.0481CO + 0.0444COS + 0.0061HCOOH + 0.0357CH2OS + 0.0317COH2S + 0.0106CH4S + 0.0074C2H4S + 0.0119C2H6S + 0.1349CHAR + 0.0251C24H28O4 + 0.0148C2H3CHO";
+		A			1.50E+08;
+		beta		0;
+		Ta			16104.6804227479;
+		Tcrit		400;
+	}
+
+	reaction15
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIG = 0.7307VANILLIN + 0.0519C6H5OCH3 + 0.0674C2H4 + 0.0807CO + 0.0635CH3CHO + 0.0058CHAR";
+		A			4.00E+00;
+		beta		1;
+		Ta			6039.25515853045;
+		Tcrit		400;
+	}
+
+	reaction16
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIG = 0.0519H2O + 0.0404CO + 0.0211CO2 + 0.0154CH4 + 0.0577CH2O + 0.0269COS + 0.0308CH4S + 0.0674C2H4S + 0.0616CH3OHS + 0.1803CH2OS + 0.0937COH2S + 0.3519CHAR + 0.0010H2S";
+		A			8.30E-02;
+		beta		1;
+		Ta			4026.17010568697;
+		Tcrit		400;
+	}
+
+	reaction17
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"LIG = 0.0519H2O + 0.3498CO + 0.0462CH4 + 0.0577CH2O + 0.1011C2H4 + 0.0616CH3OH + 0.2596CHAR + 0.0722C2H6";
+		A			1.50E+09;
+		beta		0;
+		Ta			15853.0447911424;
+		Tcrit		400;
+	}
+
+	reaction18
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"TGL = 0ASH + 0.0625C2H3CHO + 0.8203MLINO + 0.1172U2ME12";
+		A			7.00E+12;
+		beta		0;
+		Ta			22999.4967287368;
+		Tcrit		400;
+	}
+
+	reaction19
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"TANN = 0.2629C6H5OH + 0.0464C6H5OHS + 0.0921COS + 0.0592H2O + 0.5394ITANN";
+		A			2.00E+01;
+		beta		0;
+		Ta			5032.71263210871;
+		Tcrit		400;
+	}
+
+	reaction20
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"ITANN = 0.3659CHAR + 0.3413CO + 0.1098H2O + 0.1006CH2OS + 0.0823COH2S";
+		A			1.00E+03;
+		beta		0;
+		Ta			12581.7815802718;
+		Tcrit		400;
+	}
+
+	reaction21
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CO2S = 0ASH + CO2";
+		A			1.00E+06;
+		beta		0;
+		Ta			12330.1459486663;
+		Tcrit		400;
+	}
+
+	reaction22
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"COS = 0ASH + CO";
+		A			5.00E+12;
+		beta		0;
+		Ta			26421.7413185707;
+		Tcrit		400;
+	}
+
+	reaction23
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CH3OHS = 0ASH + CH3OH";
+		A			2.00E+12;
+		beta		0;
+		Ta			25163.5631605435;
+		Tcrit		400;
+	}
+
+	reaction24
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CH2OS = 0.3200CHAR + 0.4800H2O + 0.1866CO + 0.0134H2";
+		A			6.00E+10;
+		beta		0;
+		Ta			25163.5631605435;
+		Tcrit		400;
+	}
+
+	reaction25
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"C2H6S = 0ASH + C2H6";
+		A			1.00E+11;
+		beta		0;
+		Ta			26170.1056869653;
+		Tcrit		400;
+	}
+
+	reaction26
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"CH4S = 0ASH + CH4";
+		A			1.00E+11;
+		beta		0;
+		Ta			26673.3769501761;
+		Tcrit		400;
+	}
+
+	reaction27
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"C2H4S = 0ASH + C2H4";
+		A			1.00E+11;
+		beta		0;
+		Ta			27176.648213387;
+		Tcrit		400;
+	}
+
+	reaction28
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"C6H5OHS = 0ASH + C6H5OH";
+		A			1.50E+12;
+		beta		0;
+		Ta			27679.9194765979;
+		Tcrit		400;
+	}
+
+	reaction29
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"COH2S = 0.0800CHAR + 0.1200H2O + 0.7463CO + 0.0537H2";
+		A			1.00E+09;
+		beta		0;
+		Ta			29693.0045294414;
+		Tcrit		400;
+	}
+
+	reaction30
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"H2S = 0ASH + H2";
+		A			1.80E+08;
+		beta		0;
+		Ta			35228.9884247609;
+		Tcrit		400;
+	}
+
+	/*reaction31
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"WATER = 0ASH + H2O";
+		A			1.00E+00;
+		beta		1;
+		Ta			4026.17010568697;
+		Tcrit		373;
+	}*/
+	
+	reaction31
+	{
+		type		irreversiblemorArrheniusSolidReaction;
+		reaction	"WATER = 0ASH + H2O";
+		A           5.13E+10;
+        beta		0;
+        Ta          10584.5561703151;
+        Tcrit       373;
+	}
+}

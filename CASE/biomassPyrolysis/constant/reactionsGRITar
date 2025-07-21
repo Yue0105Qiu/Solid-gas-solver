@@ -1,0 +1,63 @@
+elements        
+5
+(
+O
+H
+C
+N
+Ar
+)
+;
+
+species         
+31
+(
+	HCOOH
+	H2
+	H2O
+	CO
+	CO2
+	CHOCHO
+	CH2O
+	CH2OHCHO
+	CH2OHCH2CHO
+	CH3OH
+	CH3CHO
+	CH3CO2H
+	CH4
+	C2H3CHO
+	C2H4
+	C2H5OH
+	C2H5CHO
+	C2H6
+	C5H8O4
+	C6H5OH
+	C6H5OCH3
+	C6H6O3
+	C6H10O5
+	C24H28O4
+	FURFURAL
+	VANILLIN
+	CRESOL
+	MLINO
+	U2ME12
+	N2
+	O2
+)
+;
+
+reactions
+{
+    /*un-named-reaction-0
+    {
+        type            irreversibleArrheniusReaction;
+        reaction        "C2H5OH = H2 + CO + CH4";
+        A               2.03e+10;
+        beta            0;
+        Ta              23451.65238;
+    }*/
+}
+
+Tlow            250;
+Thigh           5000;
+

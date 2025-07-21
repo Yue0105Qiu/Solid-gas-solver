@@ -1,31 +1,69 @@
+// gas-phase species. Here we assume that Yg contains all the species in the gas phase, i.e., there is no gas-phase reaction.
+volScalarField Yt(0.0*Yg[0]);
+const speciesTable& gasTable = chemistryS.gasTable();
+
+forAll(Yg, specieI)
 {
-    // Solve solid species
-    forAll(Y, specieI)
-    {
-        if (isSolid[specieI])
-        {
-            volScalarField& Yi = Y[specieI];
+	if (specieI != inertIndex)
+	{
+		volScalarField& Yi = Yg[speci];
+		
+		// Find the source term in the gas phase 
+		label j=-1;
+		volScalarField::Internal sourceGasI = 0 * chemistryS.RRg(0);
 
-            solve
-            (
-                fvm::ddt(rho, Yi) - chemistry.RR(specieI),
-                mesh.solver("Yi")
-            );
-        }
-    }
+		forAll(gasTable, gasI)
+		{
+			if (gasTable[gasI]+".gas" == Yg[speci].name())
+			{
+				j = gasI;
+			}
+		}
 
-    // Solve gas species
-    forAll(Y, specieI)
-    {
-        if (!isSolid[specieI])
-        {
-            volScalarField& Yi = Y[specieI];
+		if (j>-1)
+		{
+			//Info<< gasTable[j] << " is available." << endl;
+			sourceGasI = chemistryS.RRg(j);
+		}
+		else
+		{
+			Info<< Yg[speci].name() << " is not available!!!" << endl;
+		}
 
-            solve
-            (
-                fvm::ddt(rho, Yi) - chemistry.RR(specieI),
-                mesh.solver("Yi")
-            );
-        }
-    }
+		fvScalarMatrix YiEqn
+		(
+			fvm::ddt(rhoG, Yi) == sourceGasI 
+		);
+
+		YiEqn.relax();
+		//fvOptions.constrain(YiEqn);
+		YiEqn.solve(mesh.solver("Yi"));
+		Yi.correctBoundaryConditions();
+		//fvOptions.correct(Yi);
+		Yi.max(0.0); // This is to avoid negative Yi
+		Yt += Yi;
+	}
 }
+
+if (gMax(Yt) > 1.0)
+{
+	Info<< "------>WARNING : gMax(Yt) = "<< gMax(Yt) <<endl;
+	label n = 0;
+	forAll(Yt, celli)
+	{
+		if (Yt[celli] > 1.0)
+		{
+			n++;
+			forAll(Yg, speci)
+			{
+				Yg[speci][celli] /= Yt[celli];
+			}
+			Yt[celli] = 1.0;
+		}
+	}
+	Info<<"Yt > 1.0 in "<< n << " cells!"<<endl<<endl;
+}
+
+Yg[inertIndex] = scalar(1) - Yt;
+Yg[inertIndex].correctBoundaryConditions();
+Yg[inertIndex].max(0.0);

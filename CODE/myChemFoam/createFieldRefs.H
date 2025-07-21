@@ -1,4 +1,5 @@
 BasicChemistryModel<rhoReactionThermo>& chemistry = pChemistry();
+myBasicChemistryModel<rhoReactionThermo>&  chemistryS = pChemistryS();
 scalar dtChem = min
 (
     refCast<const BasicChemistryModel<rhoReactionThermo>>
@@ -7,6 +8,11 @@ scalar dtChem = min
     ).deltaTChem()[0],
     runTime.deltaT().value()
 );
-basicSpecieMixture& composition = thermo.composition();
-PtrList<volScalarField>& Y = composition.Y();
-volScalarField& p = thermo.p();
+
+basicSpecieMixture& compositionG = thermoG.composition();
+PtrList<volScalarField>& Yg = compositionG.Y();
+
+basicSpecieMixture& compositionS = thermoS.composition();
+PtrList<volScalarField>& Ys = thermoS.composition().Y();
+
+volScalarField& p = thermoG.p();

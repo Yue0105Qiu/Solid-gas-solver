@@ -1,5 +1,5 @@
 {
-    rho = thermo.rho();
+    rho = thermoG.rho();
     if (constProp == "volume")
     {
         scalar invW = 0.0;

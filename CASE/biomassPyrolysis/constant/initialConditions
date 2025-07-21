@@ -1,0 +1,12 @@
+p 101325;
+T 300;
+constantProperty pressure;
+fractionBasis mass;
+fractions
+{
+    BM   1.0;
+    GAS  0.0;
+    TAR  0.0;
+    CHAR 0.0;
+}
+solidSpecies (BM TAR CHAR);
