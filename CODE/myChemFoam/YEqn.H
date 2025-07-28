@@ -1,4 +1,22 @@
 // gas-phase species. Here we assume that Yg contains all the species in the gas phase, i.e., there is no gas-phase reaction.
+
+label inertIndex = -1;
+if (Yg.size())
+{
+	const word inertSpecie(thermoG.lookup("inertSpecie"));
+	if (!compositionG.species().found(inertSpecie))
+	{
+		FatalIOErrorIn(args.executable().c_str(), thermoG)
+			<< "Inert specie " << inertSpecie
+			<< " not found in available species "
+			<< compositionG.species()
+			<< exit(FatalIOError);
+	}
+	inertIndex = compositionG.species()[inertSpecie];
+}
+
+
+
 volScalarField Yt(0.0*Yg[0]);
 const speciesTable& gasTable = chemistryS.gasTable();
 
@@ -6,7 +24,7 @@ forAll(Yg, specieI)
 {
 	if (specieI != inertIndex)
 	{
-		volScalarField& Yi = Yg[speci];
+		volScalarField& Yi = Yg[specieI];
 		
 		// Find the source term in the gas phase 
 		label j=-1;
@@ -14,7 +32,7 @@ forAll(Yg, specieI)
 
 		forAll(gasTable, gasI)
 		{
-			if (gasTable[gasI]+".gas" == Yg[speci].name())
+			if (gasTable[gasI]+".gas" == Yg[specieI].name())
 			{
 				j = gasI;
 			}
@@ -27,7 +45,7 @@ forAll(Yg, specieI)
 		}
 		else
 		{
-			Info<< Yg[speci].name() << " is not available!!!" << endl;
+			Info<< Yg[specieI].name() << " is not available!!!" << endl;
 		}
 
 		fvScalarMatrix YiEqn
@@ -54,9 +72,9 @@ if (gMax(Yt) > 1.0)
 		if (Yt[celli] > 1.0)
 		{
 			n++;
-			forAll(Yg, speci)
+			forAll(Yg, specieI)
 			{
-				Yg[speci][celli] /= Yt[celli];
+				Yg[specieI][celli] /= Yt[celli];
 			}
 			Yt[celli] = 1.0;
 		}

@@ -39,14 +39,17 @@ Description
 #include "OFstream.H"
 #include "thermoPhysicsTypes.H"
 #include "basicSpecieMixture.H"
-#include "cellModeller.H"
-#include "thermoTypeFunctions.H"
+
 
 
 #include "solidThermo.H"
 #include "fvOptions.H"
 #include "pressureControl.H"
 #include "myBasicSolidChemistryModel.H"
+#include "solidThermoPhysicsTypes.H"
+
+#include "cellModeller.H"
+#include "thermoTypeFunctions.H"
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 int main(int argc, char *argv[])
@@ -81,30 +84,40 @@ int main(int argc, char *argv[])
 
         #include "solveChemistry.H"
         #include "rhoSolidEqn.H"
-        if (pimple.firstIter())
-		{
-			#include "rhoGasEqn.H"
-		}
+        // if (pimple.firstIter())
+		// {
+		// 	#include "rhoGasEqn.H"
+		// }
 
-        #include "YEqn.H"
-        #include "TEqn.H"
+        // #include "YEqn.H"
+        // #include "TEqn.H"
+
+        #include "rhoSolidEqn.H"
+		
+		#include "YEqn.H"
+		#include "TEqn.H"
+		rhoG = thermoG.rho();
+		rhoG.correctBoundaryConditions();
+		rhoS = thermoS.rho();
+		rhoS.correctBoundaryConditions();
+        #include "output.H"
 
 		// --- PISO loop
-		while (pimple.correct())
-		{
-			#include "pEqn.H"
-		}
+		// while (pimple.correct())
+		// {
+		// 	#include "pEqn.H"
+		// }
 
-        if (pimple.finalIter())
-		{
-			rhoG = thermoG.rho();
-			rhoG.correctBoundaryConditions();
+        // if (pimple.finalIter())
+		// {
+		// 	rhoG = thermoG.rho();
+		// 	rhoG.correctBoundaryConditions();
 			
-			rhoS = thermoS.rho();
-			rhoS.correctBoundaryConditions();
+		// 	rhoS = thermoS.rho();
+		// 	rhoS.correctBoundaryConditions();
 			
-			#include "output.H"
-		}
+		// 	#include "output.H"
+		// }
 
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"

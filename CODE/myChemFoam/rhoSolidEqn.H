@@ -4,7 +4,7 @@
 {	
 forAll(Ys, i)
 {
-	volScalarField& rhoSpecI = Ys[i]*rhoS;
+	volScalarField rhoSpecI = Ys[i]*rhoS;
 	fvScalarMatrix rhoEqnI
 	(
 		fvm::ddt(rhoSpecI) == chemistryS.RRs(i)

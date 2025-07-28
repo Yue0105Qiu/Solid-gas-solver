@@ -1,0 +1,2 @@
+SOURCE = \
+chemistryReaders/chemistryReader/makeChemistryReaders.C 

@@ -1,13 +1,9 @@
 #!/bin/sh
 
-wclean pyroMesh 
 wclean mySolidSpecie 
 wclean myReactionThermo
 wclean mySolidThermo
 wclean mySolidChemistryModel 
-wclean myBoundaryConditions 
 
-# rm -r pyroMesh/Make/linux*
 # rm -r mySolidSpecie/Make/linux*
 # rm -r mySolidChemistryModel/Make/linux*
-# rm -r myBoundaryConditions/Make/linux*

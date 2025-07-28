@@ -44,7 +44,10 @@ Foam::myBasicSolidChemistryModel::myBasicSolidChemistryModel
 :
     basicChemistryModel(thermo),
     solidThermo_(thermo)
-{}
+{
+    // Added by Yue on 20250726
+    Info << "@Mor  myBasicSolidChemistryModel constructor!" << endl;
+}
 
 
 // * * * * * * * * * * * * * * * * Destructor  * * * * * * * * * * * * * * * //

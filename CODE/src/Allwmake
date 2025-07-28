@@ -1,21 +1,23 @@
 #!/bin/bash
 
-echo "library directory: ${LIB_MOR}"
+echo "library directory: ${FOAM_USER_LIBBIN}"
 
 
 echo -n "compiling mySolidSpecie ... "
-wmake $LIB_MOR/mySolidSpecie  &>> log.Allwmake
+wmake mySolidSpecie  &>> log.Allwmake
 echo "done!"
 
 echo -n "compiling myReactionThermo ... "
-wmake $LIB_MOR/myReactionThermo &>> log.Allwmake
+wmake myReactionThermo &>> log.Allwmake
 echo "done!"
 
 
 echo -n "compiling mySolidThermo ... "
-wmake $LIB_MOR/mySolidThermo &>> log.Allwmake
+wmake mySolidThermo &>> log.Allwmake
 echo "done!"
 
 echo -n "compiling mySolidChemistryModel ... "
-wmake $LIB_MOR/mySolidChemistryModel  &>> log.Allwmake
+wmake mySolidChemistryModel  &>> log.Allwmake
 echo "done!"
+
+grep -q "error" log.Allwmake && echo -n " Error Found" || echo "Error Not Found"

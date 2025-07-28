@@ -27,9 +27,9 @@ thermoType
 
 chemistryReader foamChemistryReader;
 
-foamChemistryFile "$FOAM_CASE/constant/pyrolysisRegion/reactions2018";
+foamChemistryFile "$FOAM_CASE/constant/mechanism/reactions";
 
-foamChemistryThermoFile "$FOAM_CASE/constant/pyrolysisRegion/thermo2018";
+foamChemistryThermoFile "$FOAM_CASE/constant/mechanism/thermo";
 
 gasThermoType
 {
@@ -864,25 +864,6 @@ C2H3CHO
         O               1;
     }
 }
-
-
-
-
-//-----------------------------------------------------------------//
-//-----------------------------------------------------------------//
-//-----------------------------------------------------------------//
-//-----------------------------------------------------------------//
-//-----------------------------------------------------------------//
-
-
-
-
-
-
-
-
-
-
 
 
 N2

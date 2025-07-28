@@ -1,10 +1,9 @@
     runTime.write();
 
     Info<< "chemSQdot = " << chemSQdot[0]
-        << ", T = " << thermo.T()[0]
-        << ", p = " << thermo.p()[0]
-        << ", " << Y[0].name() << " = " << Y[0][0]
+        << ", T = " << thermoG.T()[0]
+        << ", " << Ys[0].name() << " = " << Ys[0][0]
         << endl;
 
-    post<< runTime.value() << token::TAB << thermo.T()[0] << token::TAB
-        << thermo.p()[0] << endl;
+    post<< runTime.value() << token::TAB << thermoG.T()[0] << token::TAB
+        << endl;

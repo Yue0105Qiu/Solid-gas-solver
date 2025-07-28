@@ -4,6 +4,11 @@
         "chemistryproperties": "cpp",
         "thermophysicalproperties": "cpp",
         "myBasicSolidChemistryModel.C": "cpp",
-        "solidReactionThermos.C": "cpp"
+        "solidReactionThermos.C": "cpp",
+        "myBasicSolidChemistryModels.C": "cpp",
+        "myBasicSolidChemistryModelNew.C": "cpp",
+        "initialconditions": "cpp",
+        "makeChemistryReaders.C": "cpp",
+        "pyrolysisChemistryModel.C": "cpp"
     }
 }

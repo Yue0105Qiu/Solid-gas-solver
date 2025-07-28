@@ -23,7 +23,14 @@ chemistryType
 
 chemistry           on;
 
-initialChemicalTimeStep 1e-10;//1E-7
+initialChemicalTimeStep 1e-7;//1E-7
+
+EulerImplicitCoeffs
+{
+    cTauChem        1;
+    equilibriumRateLimiter off;
+}
+
 
 odeCoeffs
 {

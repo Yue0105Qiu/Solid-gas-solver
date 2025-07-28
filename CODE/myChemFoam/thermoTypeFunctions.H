@@ -40,28 +40,44 @@ scalarList W(const rhoReactionThermo& thermo)
     return W;
 }
 
-
 template<class ThermoType>
-scalar h0
-(
-    const rhoReactionThermo& thermo,
-    const scalarList& Y,
-    const scalar p,
-    const scalar T
-)
+scalarList W(const solidReactionThermo& thermo)
 {
     const PtrList<ThermoType>& specieData =
-        dynamic_cast<const reactingMixture<ThermoType>&>(thermo)
+        dynamicCast<const reactingMixture<ThermoType>>(thermo)
        .speciesData();
 
-    scalar h0 = 0;
-    forAll(Y, i)
+    scalarList W(specieData.size());
+
+    forAll(specieData, i)
     {
-        h0 += Y[i]*specieData[i].Hs(p, T);
+        W[i] = specieData[i].W();
     }
 
-    return h0;
+    return W;
 }
+
+// template<class ThermoType>
+// scalar h0
+// (
+//     const rhoReactionThermo& thermo,
+//     const scalarList& Y,
+//     const scalar p,
+//     const scalar T
+// )
+// {
+//     const PtrList<ThermoType>& specieData =
+//         dynamic_cast<const reactingMixture<ThermoType>&>(thermo)
+//        .speciesData();
+
+//     scalar h0 = 0;
+//     forAll(Y, i)
+//     {
+//         h0 += Y[i]*specieData[i].Hs(p, T);
+//     }
+
+//     return h0;
+// }
 
 
 scalarList W(const rhoReactionThermo& thermo)
@@ -74,14 +90,31 @@ scalarList W(const rhoReactionThermo& thermo)
     {
         return W<constFluidHThermoPhysics>(thermo);
     }
-    // else if (isA<reactingMixture<gasHPowerThermoPhysics>>(thermo))
-    // {
-    //     return W<gasHPowerThermoPhysics>(thermo);
-    // }
-    // else if (isA<reactingMixture<constFluidHPowerThermoPhysics>>(thermo))
-    // {
-    //     return W<constFluidHPowerThermoPhysics>(thermo);
-    // }
+    else
+    {
+        FatalErrorInFunction
+            << "Thermodynamics type " << thermo.type()
+            << " not supported by chemFoam"
+            << exit(FatalError);
+
+        return scalarList::null();
+    }
+}
+
+scalarList W(const solidReactionThermo& thermo)
+{
+    if (isA<reactingMixture<hConstSolidThermoPhysics>>(thermo))
+    {
+        return W<hConstSolidThermoPhysics>(thermo);
+    }
+    else if (isA<reactingMixture<hExpKappaConstSolidThermoPhysics>>(thermo))
+    {
+        return W<hExpKappaConstSolidThermoPhysics>(thermo);
+    }
+    else if (isA<reactingMixture<hjanafKappaConstSolidThermoPhysics>>(thermo))
+    {
+        return W<hjanafKappaConstSolidThermoPhysics>(thermo);
+    }
     else
     {
         FatalErrorInFunction
@@ -94,40 +127,44 @@ scalarList W(const rhoReactionThermo& thermo)
 }
 
 
-scalar h0
-(
-    const rhoReactionThermo& thermo,
-    const scalarList& Y,
-    const scalar p,
-    const scalar T
-)
-{
-    if (isA<reactingMixture<gasHThermoPhysics>>(thermo))
-    {
-        return h0<gasHThermoPhysics>(thermo, Y, p, T);
-    }
-    else if (isA<reactingMixture<constFluidHThermoPhysics>>(thermo))
-    {
-        return h0<constFluidHThermoPhysics>(thermo, Y, p, T);
-    }
-    // else if (isA<reactingMixture<gasHPowerThermoPhysics>>(thermo))
-    // {
-    //     return h0<gasHPowerThermoPhysics>(thermo, Y, p, T);
-    // }
-    // else if (isA<reactingMixture<constFluidHPowerThermoPhysics>>(thermo))
-    // {
-    //     return h0<constFluidHPowerThermoPhysics>(thermo, Y, p, T);
-    // }
-    else
-    {
-        FatalErrorInFunction
-            << "Thermodynamics type " << thermo.type()
-            << " not supported by chemFoam"
-            << exit(FatalError);
 
-        return 0;
-    }
-}
+
+
+// h0 not used.
+// scalar h0
+// (
+//     const rhoReactionThermo& thermo,
+//     const scalarList& Y,
+//     const scalar p,
+//     const scalar T
+// )
+// {
+//     if (isA<reactingMixture<gasHThermoPhysics>>(thermo))
+//     {
+//         return h0<gasHThermoPhysics>(thermo, Y, p, T);
+//     }
+//     else if (isA<reactingMixture<constFluidHThermoPhysics>>(thermo))
+//     {
+//         return h0<constFluidHThermoPhysics>(thermo, Y, p, T);
+//     }
+//     // else if (isA<reactingMixture<gasHPowerThermoPhysics>>(thermo))
+//     // {
+//     //     return h0<gasHPowerThermoPhysics>(thermo, Y, p, T);
+//     // }
+//     // else if (isA<reactingMixture<constFluidHPowerThermoPhysics>>(thermo))
+//     // {
+//     //     return h0<constFluidHPowerThermoPhysics>(thermo, Y, p, T);
+//     // }
+//     else
+//     {
+//         FatalErrorInFunction
+//             << "Thermodynamics type " << thermo.type()
+//             << " not supported by chemFoam"
+//             << exit(FatalError);
+
+//         return 0;
+//     }
+// }
 
 
 // ************************************************************************* //

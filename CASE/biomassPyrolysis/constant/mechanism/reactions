@@ -1,0 +1,92 @@
+species
+(
+	ASH
+	BM
+	CHAR
+	WATER
+);
+
+gaseousSpecies
+(
+    GAS
+N2
+    TAR
+    H2O
+    O2
+    CO2
+    CO
+    H2
+);
+
+// Hesam reaction rates, from Di Blassi
+
+reactions
+{
+    reaction1
+    {
+        type        irreversibleArrheniusSolidReaction;
+        reaction    "BM = GAS + 0CHAR";
+        A           4.4E+9;
+        Ta          18402.6942506615;
+        Tcrit       400;
+    }
+    
+    reaction2
+    {
+        type        irreversibleArrheniusSolidReaction;
+		reaction    "BM = 0CHAR + TAR";
+        A           1.1E+10;
+        Ta          17801.2990137118;
+        Tcrit       400;
+    }
+    
+    reaction3
+    {
+        type        irreversibleArrheniusSolidReaction;
+        reaction    "BM = CHAR";
+        A           3.3E+6;
+        Ta          13471.2533076738;
+        Tcrit       400;
+    }
+    
+    // CHAR reactions
+    /*reaction4
+    {
+        type        irreversiblemorArrheniusSolidReaction;
+        reaction    "CHAR + 1.3320O2^1.0 = 2.3320CO + 0CHAR";
+        A           0.658; //E+6
+        beta		1;
+        Ta          8996.3317;
+        Tcrit       400;
+    }
+    
+    reaction5
+    {
+        type        irreversiblemorArrheniusSolidReaction;
+        reaction    "CHAR + 3.6641CO2 = 4.6641CO + 0CHAR";
+        A           3.42E-06;
+        beta		1;
+        Ta          15635.335;
+        Tcrit       400;
+    }
+    
+    reaction6
+    {
+        type        irreversiblemorArrheniusSolidReaction;
+        reaction    "CHAR + 1.4999H2O = 2.3320CO + 0.1679H2 + 0CHAR";
+        A           3.42E-06;
+        beta		1;
+        Ta          15635.335;
+        Tcrit       400;
+    }*/
+    
+    // Evaporation
+    reaction29
+    {
+        type        irreversibleArrheniusSolidReaction;
+        reaction    "WATER = 0CHAR + H2O";
+        A           5.13E+10;
+        Ta          10584.5561703151;
+        Tcrit       373;
+    }
+}

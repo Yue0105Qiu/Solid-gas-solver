@@ -20,6 +20,40 @@ Info<< "Creating base fields for time " << runTime.timeName() << endl;
 
     Ydefault.write();
 
+    volScalarField Y0Default
+    (
+        IOobject
+        (
+            "Y0Default",
+            runTime.timeName(),
+            mesh,
+            IOobject::READ_IF_PRESENT,
+            IOobject::NO_WRITE,
+            false
+        ),
+        mesh,
+        dimensionedScalar("Y0Default", dimless, 1)
+    );
+
+    Y0Default.write();
+
+    volScalarField Ydefault_gas
+    (
+        IOobject
+        (
+            "Ydefault.gas",
+            runTime.timeName(),
+            mesh,
+            IOobject::READ_IF_PRESENT,
+            IOobject::NO_WRITE,
+            false
+        ),
+        mesh,
+        dimensionedScalar("Ydefault", dimless, 1)
+    );
+
+    Ydefault_gas.write();
+
     volScalarField p
     (
         IOobject
@@ -53,4 +87,21 @@ Info<< "Creating base fields for time " << runTime.timeName() << endl;
     );
 
     T.write();
+
+    volScalarField T_gas
+    (
+        IOobject
+        (
+            "T.gas",
+            runTime.timeName(),
+            mesh,
+            IOobject::READ_IF_PRESENT,
+            IOobject::NO_WRITE,
+            false
+        ),
+        mesh,
+        dimensionedScalar("T", dimTemperature, T0)
+    );
+
+    T_gas.write();
 }

@@ -1,175 +1,221 @@
-    const word constProp(initialConditions.lookup("constantProperty"));
-    if ((constProp != "pressure") && (constProp != "volume"))
+const word constProp(initialConditions.lookup("constantProperty"));
+if ((constProp != "pressure") && (constProp != "volume"))
+{
+    FatalError << "in initialConditions, unknown constantProperty type "
+        << constProp << nl << " Valid types are: pressure volume."
+        << abort(FatalError);
+}
+
+const word fractionBasis(initialConditions.lookup("fractionBasis"));
+if ((fractionBasis != "mass") && (fractionBasis != "mole"))
+{
+    FatalError << "in initialConditions, unknown fractionBasis type " << nl
+        << "Valid types are: mass or mole."
+        << fractionBasis << abort(FatalError);
+}
+
+const label nSpecieG = Yg.size();
+const label nSpecieS = Ys.size();
+const scalarList Wg(::W(thermoG));
+// Info << "Wg = " << Wg << endl;
+const scalarList Ws(::W(thermoS));
+// Info << "Ws = " << Ws << endl;
+
+scalarList Yg0(nSpecieG, 0.0);
+scalarList Xg0(nSpecieG, 0.0);
+scalarList Ys0(nSpecieS, 0.0);
+scalarList Xs0(nSpecieS, 0.0);
+
+// The initial composition is provided via two dictionaries
+// `solidSpecies` and `gasSpecies`.  Each dictionary maps specie
+// names to their initial fractions.  The old `fractions` format is
+// no longer supported.
+
+dictionary solidFractions;
+dictionary gasFractions;
+
+if (initialConditions.found("solidSpecies"))
+{
+    solidFractions = initialConditions.subDict("solidSpecies");
+}
+
+if (initialConditions.found("gasSpecies"))
+{
+    gasFractions = initialConditions.subDict("gasSpecies");
+}
+
+
+forAllConstIter(dictionary, solidFractions, iter)
+{
+    const word specName(iter().keyword());
+    bool found = false;
+    forAll(Ys, i)
     {
-        FatalError << "in initialConditions, unknown constantProperty type "
-            << constProp << nl << " Valid types are: pressure volume."
-            << abort(FatalError);
+        if (specName == Ys[i].name())
+        {
+            found = true;
+            break;
+        }
     }
-
-    const word fractionBasis(initialConditions.lookup("fractionBasis"));
-    if ((fractionBasis != "mass") && (fractionBasis != "mole"))
+    if (!found)
     {
-        FatalError << "in initialConditions, unknown fractionBasis type " << nl
-            << "Valid types are: mass or mole."
-            << fractionBasis << abort(FatalError);
+        FatalErrorInFunction
+            << "Solid specie " << specName << " not found in mixture"
+            << exit(FatalError);
     }
+}
 
-    const label nSpecie = Y.size();
-    const scalarList W(::W(thermo));
-
-    scalarList Y0(nSpecie, 0.0);
-    scalarList X0(nSpecie, 0.0);
-
-    // The initial composition is provided via two dictionaries
-    // `solidSpecies` and `gasSpecies`.  Each dictionary maps specie
-    // names to their initial fractions.  The old `fractions` format is
-    // no longer supported.
-
-    dictionary solidFractions;
-    dictionary gasFractions;
-
-    if (initialConditions.found("solidSpecies"))
+forAllConstIter(dictionary, gasFractions, iter)
+{
+    const word specName(iter().keyword());
+    bool found = false;
+    forAll(Yg, i)
     {
-        solidFractions = initialConditions.subDict("solidSpecies");
+        // Info << Yg[i].name() << endl;
+        if (specName + ".gas" == Yg[i].name() )
+        {
+            found = true;
+            break;
+        }
     }
-
-    if (initialConditions.found("gasSpecies"))
+    
+    if (!found)
     {
-        gasFractions = initialConditions.subDict("gasSpecies");
+        FatalErrorInFunction
+            << "Gas specie " << specName << " not found in mixture"
+            << exit(FatalError);
     }
+}
 
-    isSolid.setSize(nSpecie, false);
+// Info << "Solid / gas species read!" << endl;
 
-    forAll(Y, i)
+if (fractionBasis == "mole") // mole fraction
+{
+    // gas-phase species
+    forAll(Yg, i)
     {
-        const word& name = Y[i].name();
+        const word& name = Yg[i].name();
+        if (gasFractions.found(name))
+        {
+            Xg0[i] = readScalar(gasFractions.lookup(name));
+        }
+    }
+    scalar mwg = 0.0;
+    const scalar mTotg = sum(Xg0);
+    forAll(Yg, i)
+    {
+        Xg0[i] /= mTotg;
+        mwg += Wg[i]*Xg0[i];
+    }
+    forAll(Yg, i)
+    {
+        Yg0[i] = Xg0[i]*Wg[i]/mwg;
+    }
+    
+
+    // solid-phase species
+    forAll(Ys, i)
+    {
+        const word& name = Ys[i].name();
         if (solidFractions.found(name))
         {
-            isSolid[i] = true;
+            Xs0[i] = readScalar(solidFractions.lookup(name));
         }
     }
 
-    forAllConstIter(dictionary, solidFractions, iter)
+    scalar mws = 0.0;
+    const scalar mTots = sum(Xs0);
+    forAll(Ys, i)
     {
-        const word specName(iter().keyword());
-        bool found = false;
-        forAll(Y, i)
-        {
-            if (specName == Y[i].name())
-            {
-                found = true;
-                break;
-            }
-        }
-        if (!found)
-        {
-            FatalErrorInFunction
-                << "Solid specie " << specName << " not found in mixture"
-                << exit(FatalError);
-        }
+        Xs0[i] /= mTots;
+        mws += Ws[i]*Xs0[i];
     }
 
-    forAllConstIter(dictionary, gasFractions, iter)
+    forAll(Ys, i)
     {
-        const word specName(iter().keyword());
-        bool found = false;
-        forAll(Y, i)
-        {
-            if (specName == Y[i].name())
-            {
-                found = true;
-                break;
-            }
-        }
-        if (!found)
-        {
-            FatalErrorInFunction
-                << "Gas specie " << specName << " not found in mixture"
-                << exit(FatalError);
-        }
+        Ys0[i] = Xs0[i]*Ws[i]/mws;
     }
-
-
-    if (fractionBasis == "mole") // mole fraction
+}
+else  // mass fraction
+{
+    // gas-phase species
+    forAll(Yg, i)
     {
-        forAll(Y, i)
+        const word& fullname = Yg[i].name() ;
+        const word name = fullname.substr(0,fullname.size()-4);
+        if (gasFractions.found(name))
         {
-            const word& name = Y[i].name();
-            if (solidFractions.found(name))
-            {
-                X0[i] = readScalar(solidFractions.lookup(name));
-            }
-            else if (gasFractions.found(name))
-            {
-                X0[i] = readScalar(gasFractions.lookup(name));
-            }
-        }
-
-        scalar mw = 0.0;
-        const scalar mTot = sum(X0);
-        forAll(Y, i)
-        {
-            X0[i] /= mTot;
-            mw += W[i]*X0[i];
-        }
-
-        forAll(Y, i)
-        {
-            Y0[i] = X0[i]*W[i]/mw;
+            Yg0[i] = readScalar(gasFractions.lookup(name));
         }
     }
-    else  // mass fraction
+    scalar invWg = 0.0;
+    const scalar mTotg = sum(Yg0);
+    forAll(Yg, i)
     {
-        forAll(Y, i)
-        {
-            const word& name = Y[i].name();
-            if (solidFractions.found(name))
-            {
-                Y0[i] = readScalar(solidFractions.lookup(name));
-            }
-            else if (gasFractions.found(name))
-            {
-                Y0[i] = readScalar(gasFractions.lookup(name));
-            }
-        }
-
-        scalar invW = 0.0;
-        const scalar mTot = sum(Y0);
-        forAll(Y, i)
-        {
-            Y0[i] /= mTot;
-            invW += Y0[i]/W[i];
-        }
-        const scalar mw = 1.0/invW;
-
-        forAll(Y, i)
-        {
-            X0[i] = Y0[i]*mw/W[i];
-        }
+        Yg0[i] /= mTotg;
+        invWg += (Yg0[i] < small)? 0:(Yg0[i]/Wg[i]);
     }
+    const scalar mwg = 1.0/invWg;
 
-
-
-    const scalar h0 = ::h0(thermo, Y0, p[0], T0);
-
-    forAll(Y, i)
+    forAll(Yg, i)
     {
-        Y[i] = Y0[i];
+        Xg0[i] = Yg0[i]*mwg/Wg[i];
     }
 
-    thermo.he() = dimensionedScalar("h", dimEnergy/dimMass, h0);
-    thermo.correct();
 
-    rho = thermo.rho();
-    scalar rho0 = rho[0];
-    scalar u0 = h0 - p0/rho0;
-    scalar R0 = p0/(rho0*T0);
-    Rspecific[0] = R0;
+    // solid-phase species
+    forAll(Ys, i)
+    {
+        const word& name = Ys[i].name();
+        if (solidFractions.found(name))
+        {
+            Ys0[i] = readScalar(solidFractions.lookup(name));
+        }
+    }
 
-    scalar integratedHeat = 0.0;
+    scalar invWs = 0.0;
+    const scalar mTots = sum(Ys0);
+    forAll(Ys, i)
+    {
+        Ys0[i] /= mTots;
+        invWs += (Ys0[i] < small)? 0:(Ys0[i]/Ws[i]);
+    }
+    const scalar mws = 1.0/invWs;
 
-    Info << constProp << " will be held constant." << nl
-        << " p   = " << p[0] << " [Pa]" << nl
-        << " T   = " << thermo.T()[0] << " [K] " << nl
-        << " rho = " << rho[0] << " [kg/m3]" << nl
-        << endl;
+    forAll(Ys, i)
+    {
+        Xs0[i] = Ys0[i]*mws/Ws[i];
+    }
+}
+
+
+
+// const scalar h0 = ::h0(thermo, Y0, p[0], T0);
+
+forAll(Yg, i)
+{
+    Yg[i] = Yg0[i];
+}
+
+
+forAll(Ys, i)
+{
+    Ys[i] = Ys0[i];
+}
+
+// thermoG.he() = dimensionedScalar("h", dimEnergy/dimMass, h0);
+// thermoG.correct();
+
+// rhoG = thermoG.rho();
+// scalar rho0 = rho[0];
+// scalar u0 = h0 - p0/rho0;
+// scalar R0 = p0/(rho0*T0);
+// Rspecific[0] = R0;
+
+// scalar integratedHeat = 0.0;
+
+Info << constProp << " will be held constant." << nl
+    << " p   = " << p[0] << " [Pa]" << nl
+    << " T   = " << thermoG.T()[0] << " [K] " << nl
+    << " rhoG = " << rhoG[0] << " [kg/m3]" << nl
+    << endl;

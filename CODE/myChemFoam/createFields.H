@@ -24,9 +24,9 @@
     #include "createBaseFields.H"
 
     Info<< "Reading thermophysical properties for gas\n" << endl;
-    autoPtr<rhoReactionThermo> pThermo(rhoReactionThermo::New(mesh));
+    autoPtr<rhoReactionThermo> pThermo(rhoReactionThermo::New(mesh, "gas")); // will check the thermophysicalProperties file
     rhoReactionThermo& thermoG = pThermo();
-    thermoG.validate(args.executable(), "h");
+    // thermoG.validate(args.executable(), "h.gas");
 
     autoPtr<BasicChemistryModel<rhoReactionThermo>> pChemistry
     (
@@ -92,10 +92,12 @@
     autoPtr<solidReactionThermo> pThermoS(solidReactionThermo::New(mesh));
     solidReactionThermo& thermoS = pThermoS();
     // thermoS.validate(args.executable(), "h");
-    autoPtr<myBasicChemistryModel<solidReactionThermo>> pChemistryS
+    autoPtr<myBasicSolidChemistryModel> pChemistryS
     (
-        myBasicChemistryModel<solidReactionThermo>::New(thermS)
+        myBasicSolidChemistryModel::veryNew(thermoS)
     );
+
+    Info << "leave myBasicSolidChemistryModel" << endl;
 
     // PtrList<volScalarField> QdotsSolid();
     volScalarField rhoS

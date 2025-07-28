@@ -1,0 +1,121 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       dictionary;
+    location    "constant";
+    object      thermo.solid;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+BM
+{
+    specie
+    {
+        molWeight   145;
+    }
+    transport
+    {
+        kappa       0.2; //0.156;
+    }
+    thermodynamics
+    {
+        /*C0          1647.014;
+        n0			0.253;
+        Tref		300.0;
+        Hf          -5120e3;*/
+        C0          1859.379397;
+        n0			0.161655;
+        Tref		300.0;
+        Hf          -5120e3;
+   }
+    equationOfState
+    {
+        rho         1100; //1100;
+    }
+};
+
+CHAR
+{
+    specie
+    {
+        molWeight   12;
+    }
+    transport
+    {
+        kappa       0.09; //0.1065; 
+    }
+    thermodynamics
+    {
+        /*C0          723.167;
+        n0			0.640;
+        Tref		300.0;
+        Hf          -5145e3;*/
+        C0          974.736497;
+        n0			0.781806;
+        Tref		300.0;
+        Hf          -5145e3;
+    }
+    equationOfState
+    {
+        rho         1100; //1100;
+    }
+};
+
+ASH
+{
+    specie
+    {
+        molWeight   12;
+    }
+    transport
+    {
+        kappa       1.2; //0.1065; 
+    }
+    thermodynamics
+    {
+        C0          800;
+        n0			0;
+        Tref		300.0;
+        Hf          0;
+    }
+    equationOfState
+    {
+        rho         1100; //1100;
+    }
+};
+
+WATER
+{
+    specie
+    {
+        molWeight   18.01534;
+    }
+    transport
+    {
+        kappa       0.6; //0.4;
+    }
+    thermodynamics
+    {
+        C0          4200;
+        n0			0;
+        Tref		300.0;
+        Hf          -1.59e7;
+    }
+    equationOfState
+    {
+        rho         1100; //1000;
+    }
+};
+
+
+
+// ************************************************************************* //

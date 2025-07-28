@@ -1,5 +1,4 @@
 
-while (pimple.correctNonOrthogonal())
 {
 	volScalarField& T = thermoS.T();
 	volScalarField& h = thermoS.he();

@@ -1,0 +1,3 @@
+#!/bin/bash
+wmake > log.make 2>&1 &&
+grep -q "error" log.make && echo -n " Error Found" || echo "Error Not Found"

@@ -18,7 +18,7 @@ FoamFile
 thermoType
 {
 
-    type            hePsiThermo;
+    type            heRhoThermo;
     mixture         reactingMixture;
     transport       sutherland;
     thermo          janaf;
@@ -30,8 +30,8 @@ thermoType
 inertSpecie N2;
 
 chemistryReader foamChemistryReader;
-foamChemistryFile "$FOAM_CASE/constant/pyrolysisRegion/reactionsGRITar";
-foamChemistryThermoFile "$FOAM_CASE/constant/pyrolysisRegion/thermoGRITar";
+foamChemistryFile "$FOAM_CASE/constant/mechanism/reactionsGRITar";
+foamChemistryThermoFile "$FOAM_CASE/constant/mechanism/thermoGRITar";
 
 
 

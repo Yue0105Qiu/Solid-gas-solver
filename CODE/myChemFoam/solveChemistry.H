@@ -6,12 +6,5 @@
 //					    Solid Chemistry									//
 //----------------------------------------------------------------------//
 
-if (useChemistrySolvers)
-{
-	chemistryS.solve(runTime.deltaTValue());
-}
-else
-{
-	chemistryS.calculate();
-}
+chemistryS.calculate();
 volScalarField chemSQdot = chemistryS.Qdot()();
