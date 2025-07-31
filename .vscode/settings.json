@@ -9,6 +9,7 @@
         "myBasicSolidChemistryModelNew.C": "cpp",
         "initialconditions": "cpp",
         "makeChemistryReaders.C": "cpp",
-        "pyrolysisChemistryModel.C": "cpp"
+        "pyrolysisChemistryModel.C": "cpp",
+        "solidChemistryModel.C": "cpp"
     }
 }

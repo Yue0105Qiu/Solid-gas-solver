@@ -24,7 +24,7 @@ License
 \*---------------------------------------------------------------------------*/
 
 template<class ThermoType>
-scalarList W(const rhoReactionThermo& thermo)
+scalarList W(const psiReactionThermo& thermo)
 {
     const PtrList<ThermoType>& specieData =
         dynamicCast<const reactingMixture<ThermoType>>(thermo)
@@ -80,7 +80,7 @@ scalarList W(const solidReactionThermo& thermo)
 // }
 
 
-scalarList W(const rhoReactionThermo& thermo)
+scalarList W(const psiReactionThermo& thermo)
 {
     if (isA<reactingMixture<gasHThermoPhysics>>(thermo))
     {

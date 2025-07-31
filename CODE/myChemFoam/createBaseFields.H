@@ -3,6 +3,9 @@
 
 Info<< "Creating base fields for time " << runTime.timeName() << endl;
 {
+    scalar p0 = readScalar(initialConditions.lookup("p"));
+    scalar T0 = readScalar(initialConditions.lookup("T"));
+    
     volScalarField Ydefault
     (
         IOobject

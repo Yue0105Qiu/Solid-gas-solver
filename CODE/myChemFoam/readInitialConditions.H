@@ -17,9 +17,7 @@ if ((fractionBasis != "mass") && (fractionBasis != "mole"))
 const label nSpecieG = Yg.size();
 const label nSpecieS = Ys.size();
 const scalarList Wg(::W(thermoG));
-// Info << "Wg = " << Wg << endl;
 const scalarList Ws(::W(thermoS));
-// Info << "Ws = " << Ws << endl;
 
 scalarList Yg0(nSpecieG, 0.0);
 scalarList Xg0(nSpecieG, 0.0);
@@ -87,14 +85,14 @@ forAllConstIter(dictionary, gasFractions, iter)
     }
 }
 
-// Info << "Solid / gas species read!" << endl;
 
 if (fractionBasis == "mole") // mole fraction
 {
     // gas-phase species
     forAll(Yg, i)
     {
-        const word& name = Yg[i].name();
+        const word& fullname = Yg[i].name() ;
+        const word name = fullname.substr(0,fullname.size()-4);
         if (gasFractions.found(name))
         {
             Xg0[i] = readScalar(gasFractions.lookup(name));
@@ -190,7 +188,7 @@ else  // mass fraction
 
 
 
-// const scalar h0 = ::h0(thermo, Y0, p[0], T0);
+
 
 forAll(Yg, i)
 {
@@ -203,19 +201,30 @@ forAll(Ys, i)
     Ys[i] = Ys0[i];
 }
 
-// thermoG.he() = dimensionedScalar("h", dimEnergy/dimMass, h0);
-// thermoG.correct();
+// Update rhoSI with the read Ys. Added by Yue.
+forAll(Ys, i)
+{
+    rhoSI[i] = rhoS * Ys[i];
+}
 
-// rhoG = thermoG.rho();
-// scalar rho0 = rho[0];
-// scalar u0 = h0 - p0/rho0;
-// scalar R0 = p0/(rho0*T0);
-// Rspecific[0] = R0;
 
-// scalar integratedHeat = 0.0;
+
+/*
+const scalar h0 = ::h0(thermo, Y0, p[0], T0);
+thermoG.he() = dimensionedScalar("h", dimEnergy/dimMass, h0);
+thermoG.correct();
+rhoG = thermoG.rho();
+scalar rho0 = rho[0];
+scalar u0 = h0 - p0/rho0;
+scalar R0 = p0/(rho0*T0);
+Rspecific[0] = R0;
+scalar integratedHeat = 0.0;
+*/
 
 Info << constProp << " will be held constant." << nl
-    << " p   = " << p[0] << " [Pa]" << nl
+    << " p   = " << thermoG.p()[0] << " [Pa]" << nl
     << " T   = " << thermoG.T()[0] << " [K] " << nl
     << " rhoG = " << rhoG[0] << " [kg/m3]" << nl
+    << " Ys[0] = " << Ys[0][0] << nl
+    // << " rhoSI = " << rhoSI[0][0] << " " << rhoSI[1][0] << " " <<  rhoSI[2][0] << nl
     << endl;

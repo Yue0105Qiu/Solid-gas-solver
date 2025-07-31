@@ -33,6 +33,7 @@ Description
 
 #include "fvCFD.H"
 #include "rhoReactionThermo.H"
+#include "psiReactionThermo.H"
 #include "BasicChemistryModel.H"
 #include "reactingMixture.H"
 #include "chemistrySolver.H"
@@ -59,7 +60,6 @@ int main(int argc, char *argv[])
     #define CREATE_MESH createSingleCellMesh.H
     #define NO_CONTROL
     #include "postProcess.H"
-
     #include "setRootCaseLists.H"
     #include "createTime.H"
     #include "createSingleCellMesh.H"
@@ -81,43 +81,13 @@ int main(int argc, char *argv[])
         runTime++;
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
-
         #include "solveChemistry.H"
         #include "rhoSolidEqn.H"
-        // if (pimple.firstIter())
-		// {
-		// 	#include "rhoGasEqn.H"
-		// }
-
-        // #include "YEqn.H"
-        // #include "TEqn.H"
-
-        #include "rhoSolidEqn.H"
-		
 		#include "YEqn.H"
 		#include "TEqn.H"
 		rhoG = thermoG.rho();
-		rhoG.correctBoundaryConditions();
 		rhoS = thermoS.rho();
-		rhoS.correctBoundaryConditions();
         #include "output.H"
-
-		// --- PISO loop
-		// while (pimple.correct())
-		// {
-		// 	#include "pEqn.H"
-		// }
-
-        // if (pimple.finalIter())
-		// {
-		// 	rhoG = thermoG.rho();
-		// 	rhoG.correctBoundaryConditions();
-			
-		// 	rhoS = thermoS.rho();
-		// 	rhoS.correctBoundaryConditions();
-			
-		// 	#include "output.H"
-		// }
 
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"

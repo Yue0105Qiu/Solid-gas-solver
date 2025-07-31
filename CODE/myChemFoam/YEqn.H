@@ -18,13 +18,15 @@ if (Yg.size())
 
 
 volScalarField Yt(0.0*Yg[0]);
-const speciesTable& gasTable = chemistryS.gasTable();
+const speciesTable& gasTable = chemistryS.gasTable(); // gas species in pyrolysis mechanism. Species name without ".gas"
+// const psiReactionThermo& gasThermo = chemistryS.gasThermo(); 
 
 forAll(Yg, specieI)
 {
 	if (specieI != inertIndex)
 	{
 		volScalarField& Yi = Yg[specieI];
+		// Info << "Before: Yi " << Yg[specieI].name() << " " << Yi[0] << endl;
 		
 		// Find the source term in the gas phase 
 		label j=-1;
@@ -40,12 +42,15 @@ forAll(Yg, specieI)
 
 		if (j>-1)
 		{
-			//Info<< gasTable[j] << " is available." << endl;
 			sourceGasI = chemistryS.RRg(j);
+			const scalar specie_p = thermoS.p()[0];
+			const scalar specie_T = thermoS.T()[0];
+			Info<< gasTable[j] << " is available. RRg = " << sourceGasI[0] << " Ha = " << compositionG.Ha(specieI, specie_p, specie_T) << endl;
+			
 		}
 		else
 		{
-			Info<< Yg[specieI].name() << " is not available!!!" << endl;
+			// Info<< Yg[specieI].name() << " is not available!!!" << endl;// Comment by Yue
 		}
 
 		fvScalarMatrix YiEqn
@@ -56,13 +61,14 @@ forAll(Yg, specieI)
 		YiEqn.relax();
 		//fvOptions.constrain(YiEqn);
 		YiEqn.solve(mesh.solver("Yi"));
-		Yi.correctBoundaryConditions();
 		//fvOptions.correct(Yi);
 		Yi.max(0.0); // This is to avoid negative Yi
 		Yt += Yi;
+		// Info << "After: Yi " << Yg[specieI].name() << " " << Yi[0] << endl;
 	}
 }
 
+Info << "Max.Yt = " << gMax(Yt) << endl;
 if (gMax(Yt) > 1.0)
 {
 	Info<< "------>WARNING : gMax(Yt) = "<< gMax(Yt) <<endl;
@@ -83,5 +89,5 @@ if (gMax(Yt) > 1.0)
 }
 
 Yg[inertIndex] = scalar(1) - Yt;
-Yg[inertIndex].correctBoundaryConditions();
+Info << "N2 = " << gMax(Yg[inertIndex]) << endl;
 Yg[inertIndex].max(0.0);

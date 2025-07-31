@@ -23,7 +23,7 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         10;
+endTime         100;
 
 deltaT          1e-04;
 
@@ -33,7 +33,7 @@ adjustTimeStep  on;
 
 writeControl    adjustableRunTime;
 
-writeInterval   0.1;
+writeInterval   5;
 
 purgeWrite      0;
 

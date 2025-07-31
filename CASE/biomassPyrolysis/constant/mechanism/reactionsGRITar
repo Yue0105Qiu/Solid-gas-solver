@@ -10,7 +10,7 @@ Ar
 ;
 
 species         
-31
+33//Added by Yue
 (
 	HCOOH
 	H2
@@ -43,8 +43,11 @@ species
 	U2ME12
 	N2
 	O2
+	GAS
+	TAR
 )
-;
+;//Added by Yue
+
 
 reactions
 {

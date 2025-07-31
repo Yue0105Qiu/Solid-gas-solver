@@ -725,9 +725,47 @@ calculate()
 	
 	// ---------- To get Sa field
 	const fvMesh& mesh_ = this->mesh();
-	const volScalarField& Sa = mesh_.lookupObject<volScalarField>("Sa");
-	
-	//labelField gasIndexList_(nGases_, -1);
+
+    // ---------- Modified by Yue ---------- //
+    autoPtr<volScalarField> SaPtr; 
+    if (mesh_.foundObject<volScalarField>("Sa"))
+    {
+        SaPtr.reset
+        (
+            const_cast<volScalarField*>(
+                &mesh_.lookupObject<volScalarField>("Sa")
+            ) // false → don’t delete when SaPtr goes out of scope            
+        );
+    }
+    else
+    {
+        
+        SaPtr.reset
+        (
+            new volScalarField
+            (
+                IOobject
+                (
+                    "Sa",
+                    mesh_.time().timeName(),
+                    mesh_,
+                    IOobject::NO_READ,
+                    IOobject::NO_WRITE
+                ),
+                mesh_,
+                dimensionedScalar("one", dimless, 1.0)
+            )
+        );
+        Info<< "Sa not found; using default value 1" << endl;
+    }
+    
+    // Bind a reference for convenience
+    const volScalarField& Sa = SaPtr();
+
+    // const volScalarField& Sa = mesh_.lookupObject<volScalarField>("Sa");
+    // ---------- Modified by Yue ---------- //
+
+    //labelField gasIndexList_(nGases_, -1);
 	//Info<<"rhog min max:"<<gMin(rhogCopy)<<", "<<gMax(rhogCopy)<<endl;
 	//Info<<"rhog: "<<rhog<<endl;
 	//Info<<"min/max rhog: "<<gMin(rhog)<<", "<<gMax(rhog)<<endl;
@@ -741,8 +779,8 @@ calculate()
                 gasThermo_[i].name() == Yg[j].name()) 
 			{
 				index = j;
-				//Info<<i<<", "<<j<<", "<<gasThermo_[i].name()<<" min/max: "
-				//	<<gMin(Yg[j])<<", "<<gMax(Yg[j])<<endl;
+				// Info<<i<<", "<<j<<", "<<gasThermo_[i].name()<<" min/max: "
+					// <<gMin(Yg[j])<<", "<<gMax(Yg[j])<<endl;
 			}
 		}
 		gasIndexList_[i] = index;	// -1 or gas phase real index
@@ -792,10 +830,10 @@ calculate()
             scalar pi = this->solidThermo().p()[celli];
             scalar Sai = Sa[celli];
             
-            /*Info<<"rhoi = "<< rhoi<<endl;
-            Info<<"rhogCopy[celli] = "<< rhogCopy[celli]<<endl;
-			Info<<"Ti = "<< Ti<<endl;
-			Info<<"pi = "<< pi<<endl;*/
+            // Info<<"rhoi = "<< rhoi<<endl;
+            // Info<<"rhogCopy[celli] = "<< rhogCopy[celli]<<endl;
+			// Info<<"Ti = "<< Ti<<endl;
+			// Info<<"pi = "<< pi<<endl;
 
 
             scalarField c(nSpecie_+1, 0.0); // +1 is for Sai
@@ -843,6 +881,7 @@ calculate()
 					else
 					{
 						hf = this->solidThermo_[i].Ha(pi, Ti);
+                        // Info << "RRs[i]" << this->RRs_[i][celli] <<  " h[i] " << hf << endl;
 					}
 					myFinalQdot_[celli] -= this->RRs_[i][celli] * hf;
 				}
@@ -863,6 +902,7 @@ calculate()
 					else
 					{
 						hf = gasThermo_[i].Ha(pi, Ti);
+                        // Info << "RRg[i]" << this->RRg_[i][celli] <<  " h[i] " << hf << endl;
 					}
 					myFinalQdot_[celli] -= RRg_[i][celli] * hf;
 				}

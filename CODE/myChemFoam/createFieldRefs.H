@@ -1,7 +1,6 @@
-BasicChemistryModel<rhoReactionThermo>& chemistry = pChemistry();
-Info << "BasicChemistryModel constructed!" << endl;
+// BasicChemistryModel<psiReactionThermo>& chemistry = pChemistry();
+
 myBasicSolidChemistryModel&  chemistryS = pChemistryS();
-Info << "myBasicSolidChemistryModel constructed!" << endl;
 scalar dtChem = min
 (
     refCast<const myBasicSolidChemistryModel>
@@ -18,4 +17,3 @@ basicSpecieMixture& compositionS = thermoS.composition();
 PtrList<volScalarField>& Ys = thermoS.composition().Y();
 
 volScalarField& p = thermoG.p();
-Info << "createFieldRefs.H finished!" << endl;

@@ -264,7 +264,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/quate
       |             ^~~~
 In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/thermophysicalModels/specie/lnInclude/specie.H:155,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/thermophysicalModels/specie/lnInclude/thermoPhysicsTypes.H:35,
-                 from myChemFoam.C:40:
+                 from myChemFoam.C:41:
 /home/yue/OpenFOAM/OpenFOAM-6/src/thermophysicalModels/specie/lnInclude/specieI.H: In function ‘Foam::specie Foam::operator+(const Foam::specie&, const Foam::specie&)’:
 /home/yue/OpenFOAM/OpenFOAM-6/src/thermophysicalModels/specie/lnInclude/specieI.H:139:16: warning: implicitly-declared ‘Foam::specie::specie(const Foam::specie&)’ is deprecated [-Wdeprecated-copy]
   139 |         return st1;
@@ -272,6 +272,15 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/thermophysicalModels/spe
 /home/yue/OpenFOAM/OpenFOAM-6/src/thermophysicalModels/specie/lnInclude/specieI.H:97:13: note: because ‘Foam::specie’ has user-provided ‘void Foam::specie::operator=(const Foam::specie&)’
    97 | inline void specie::operator=(const specie& st)
       |             ^~~~~~
+In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/postProcess.H:135,
+                 from myChemFoam.C:62:
+./createFields.H: In function ‘int main(int, char**)’:
+./createFields.H:152:8: warning: unused variable ‘nextWriteTime’ [-Wunused-variable]
+  152 | scalar nextWriteTime = 0.0;
+      |        ^~~~~~~~~~~~~
+./createFields.H:153:15: warning: unused variable ‘writeInterval’ [-Wunused-variable]
+  153 | const scalar  writeInterval = initialConditions.lookupOrDefault<scalar>("probeInterval", 1);
+      |               ^~~~~~~~~~~~~
 In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/List.H:43,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/labelList.H:48,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UPstream.H:42,
@@ -279,12 +288,11 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/List.
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/parRun.H:35,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/finiteVolume/lnInclude/fvCFD.H:4,
                  from myChemFoam.C:34:
-readInitialConditions.H: In function ‘int main(int, char**)’:
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UList.H:475:60: warning: implicitly-declared ‘constexpr Foam::DLListBase::iterator::iterator(const Foam::DLListBase::iterator&)’ is deprecated [-Wdeprecated-copy]
   475 |         Container::const_iterator iter = (container).begin();                  \
       |                                                            ^
-readInitialConditions.H:48:1: note: in expansion of macro ‘forAllConstIter’
-   48 | forAllConstIter(dictionary, solidFractions, iter)
+readInitialConditions.H:46:1: note: in expansion of macro ‘forAllConstIter’
+   46 | forAllConstIter(dictionary, solidFractions, iter)
       | ^~~~~~~~~~~~~~~
 In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/DLListBase.H:324,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/IDLList.H:36,
@@ -320,8 +328,8 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/List.
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UList.H:475:60: warning: implicitly-declared ‘constexpr Foam::DLListBase::iterator::iterator(const Foam::DLListBase::iterator&)’ is deprecated [-Wdeprecated-copy]
   475 |         Container::const_iterator iter = (container).begin();                  \
       |                                                            ^
-readInitialConditions.H:68:1: note: in expansion of macro ‘forAllConstIter’
-   68 | forAllConstIter(dictionary, gasFractions, iter)
+readInitialConditions.H:66:1: note: in expansion of macro ‘forAllConstIter’
+   66 | forAllConstIter(dictionary, gasFractions, iter)
       | ^~~~~~~~~~~~~~~
 In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/DLListBase.H:324,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/IDLList.H:36,
@@ -347,25 +355,18 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/ILLis
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UILList.H:242:47: note:   initializing argument 1 of ‘Foam::UILList<LListBase, T>::const_iterator::const_iterator(Foam::UILList<LListBase, T>::LListBase_iterator) [with LListBase = Foam::DLListBase; T = Foam::entry; Foam::UILList<LListBase, T>::LListBase_iterator = Foam::DLListBase::iterator]’
   242 |             const_iterator(LListBase_iterator baseIter)
       |                            ~~~~~~~~~~~~~~~~~~~^~~~~~~~
-In file included from myChemFoam.C:68:
-readInitialConditions.H:159:26: error: invalid use of non-static member function ‘const Foam::word& Foam::IOobject::name() const’
-  159 |         Info << "Wg[i] " << Yg[i].name << Wg[i] << endl;
-      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
-In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/regIOobject.H:41,
-                 from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/objectRegistry.H:39,
-                 from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/Time.H:42,
-                 from /home/yue/OpenFOAM/OpenFOAM-6/src/finiteVolume/lnInclude/fvCFD.H:6,
-                 from myChemFoam.C:34:
-/home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/IOobject.H:298:25: note: declared here
-  298 |             const word& name() const
-      |                         ^~~~
+In file included from myChemFoam.C:86:
+YEqn.H:28:31: error: ‘i’ was not declared in this scope; did you mean ‘Yi’?
+   28 |   Info << "Before: Yi " << Yg[i].name() << " " << Yi[0] << endl;
+      |                               ^
+      |                               Yi
 In file included from myChemFoam.C:67:
-createFieldRefs.H:1:41: warning: unused variable ‘chemistry’ [-Wunused-variable]
-    1 | BasicChemistryModel<rhoReactionThermo>& chemistry = pChemistry();
-      |                                         ^~~~~~~~~
-createFieldRefs.H:17:21: warning: unused variable ‘compositionS’ [-Wunused-variable]
-   17 | basicSpecieMixture& compositionS = thermoS.composition();
+createFieldRefs.H:16:21: warning: unused variable ‘compositionS’ [-Wunused-variable]
+   16 | basicSpecieMixture& compositionS = thermoS.composition();
       |                     ^~~~~~~~~~~~
+createFieldRefs.H:19:17: warning: unused variable ‘p’ [-Wunused-variable]
+   19 | volScalarField& p = thermoG.p();
+      |                 ^
 In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/ILList.H:39,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/IDLList.H:35,
                  from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/entry.H:45,
@@ -377,7 +378,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/ILLis
                  from myChemFoam.C:34:
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UILList.H: In instantiation of ‘Foam::UILList<LListBase, T>::iterator::iterator(Foam::UILList<LListBase, T>::LListBase_iterator) [with LListBase = Foam::DLListBase; T = Foam::entry; Foam::UILList<LListBase, T>::LListBase_iterator = Foam::DLListBase::iterator]’:
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UILList.H:214:37:   required from ‘Foam::UILList<LListBase, T>::iterator Foam::UILList<LListBase, T>::begin() [with LListBase = Foam::DLListBase; T = Foam::entry]’
-readInitialConditions.H:48:1:   required from here
+readInitialConditions.H:46:1:   required from here
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UILList.H:189:44: warning: implicitly-declared ‘constexpr Foam::DLListBase::iterator::iterator(const Foam::DLListBase::iterator&)’ is deprecated [-Wdeprecated-copy]
   189 |                 LListBase_iterator(baseIter)
       |                                            ^
@@ -436,7 +437,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/solve
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/dataTemplates.C:60:5:   required from ‘void Foam::data::setSolverPerformance(const Foam::word&, const Foam::SolverPerformance<Type>&) const [with Type = double]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/finiteVolume/lnInclude/fvMatrixSolve.C:272:5:   required from ‘Foam::SolverPerformance<Type> Foam::fvMatrix<Type>::solveCoupled(const Foam::dictionary&) [with Type = double]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/finiteVolume/lnInclude/fvMatrixSolve.C:86:16:   required from ‘Foam::SolverPerformance<Type> Foam::fvMatrix<Type>::solve(const Foam::dictionary&) [with Type = double]’
-rhoSolidEqn.H:12:34:   required from here
+rhoSolidEqn.H:15:34:   required from here
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/SolverPerformance.H:79:7: warning: implicitly-declared ‘Foam::FixedList<bool, 1>& Foam::FixedList<bool, 1>::operator=(const Foam::FixedList<bool, 1>&)’ is deprecated [-Wdeprecated-copy]
    79 | class SolverPerformance
       |       ^~~~~~~~~~~~~~~~~
@@ -478,7 +479,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/ILLis
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:92:5:   required from ‘void Foam::GeometricField<Type, PatchField, GeoMesh>::readFields() [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:119:9:   required from ‘bool Foam::GeometricField<Type, PatchField, GeoMesh>::readIfPresent() [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:261:5:   required from ‘Foam::GeometricField<Type, PatchField, GeoMesh>::GeometricField(const Foam::IOobject&, const Mesh&, const Foam::dimensioned<Type>&, const Foam::word&) [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh; Foam::GeometricField<Type, PatchField, GeoMesh>::Mesh = Foam::fvMesh]’
-./createBaseFields.H:19:5:   required from here
+./createBaseFields.H:22:5:   required from here
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UILList.H:238:50: warning: implicitly-declared ‘constexpr Foam::DLListBase::const_iterator::const_iterator(const Foam::DLListBase::const_iterator&)’ is deprecated [-Wdeprecated-copy]
   238 |                 LListBase_const_iterator(baseIter)
       |                                                  ^
@@ -510,7 +511,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/ILLis
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:92:5:   required from ‘void Foam::GeometricField<Type, PatchField, GeoMesh>::readFields() [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:119:9:   required from ‘bool Foam::GeometricField<Type, PatchField, GeoMesh>::readIfPresent() [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:261:5:   required from ‘Foam::GeometricField<Type, PatchField, GeoMesh>::GeometricField(const Foam::IOobject&, const Mesh&, const Foam::dimensioned<Type>&, const Foam::word&) [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh; Foam::GeometricField<Type, PatchField, GeoMesh>::Mesh = Foam::fvMesh]’
-./createBaseFields.H:19:5:   required from here
+./createBaseFields.H:22:5:   required from here
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/UILList.H:306:59: warning: implicitly-declared ‘constexpr Foam::DLListBase::const_reverse_iterator::const_reverse_iterator(const Foam::DLListBase::const_reverse_iterator&)’ is deprecated [-Wdeprecated-copy]
   306 |                 LListBase::const_reverse_iterator(baseIter)
       |                                                           ^
@@ -545,7 +546,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/SLLis
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/dataTemplates.C:56:9:   required from ‘void Foam::data::setSolverPerformance(const Foam::word&, const Foam::SolverPerformance<Type>&) const [with Type = double]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/finiteVolume/lnInclude/fvMatrixSolve.C:272:5:   required from ‘Foam::SolverPerformance<Type> Foam::fvMatrix<Type>::solveCoupled(const Foam::dictionary&) [with Type = double]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/finiteVolume/lnInclude/fvMatrixSolve.C:86:16:   required from ‘Foam::SolverPerformance<Type> Foam::fvMatrix<Type>::solve(const Foam::dictionary&) [with Type = double]’
-rhoSolidEqn.H:12:34:   required from here
+rhoSolidEqn.H:15:34:   required from here
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/LList.H:302:50: warning: implicitly-declared ‘constexpr Foam::SLListBase::const_iterator::const_iterator(const Foam::SLListBase::const_iterator&)’ is deprecated [-Wdeprecated-copy]
   302 |                 LListBase_const_iterator(baseIter)
       |                                                  ^
@@ -584,7 +585,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/SLLis
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/DimensionedFieldIO.C:59:9:   required from ‘void Foam::DimensionedField<Type, GeoMesh>::readIfPresent(const Foam::word&) [with Type = double; GeoMesh = Foam::volMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/DimensionedField.C:112:9:   required from ‘Foam::DimensionedField<Type, GeoMesh>::DimensionedField(const Foam::IOobject&, const Mesh&, const Foam::dimensioned<Type>&, bool) [with Type = double; GeoMesh = Foam::volMesh; Foam::DimensionedField<Type, GeoMesh>::Mesh = Foam::fvMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:252:58:   required from ‘Foam::GeometricField<Type, PatchField, GeoMesh>::GeometricField(const Foam::IOobject&, const Mesh&, const Foam::dimensioned<Type>&, const Foam::word&) [with Type = double; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh; Foam::GeometricField<Type, PatchField, GeoMesh>::Mesh = Foam::fvMesh]’
-./createBaseFields.H:19:5:   required from here
+./createBaseFields.H:22:5:   required from here
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/LList.H:302:50: warning: implicitly-declared ‘constexpr Foam::SLListBase::const_iterator::const_iterator(const Foam::SLListBase::const_iterator&)’ is deprecated [-Wdeprecated-copy]
   302 |                 LListBase_const_iterator(baseIter)
       |                                                  ^
@@ -623,7 +624,7 @@ In file included from /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/SLLis
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/DimensionedFieldIO.C:59:9:   required from ‘void Foam::DimensionedField<Type, GeoMesh>::readIfPresent(const Foam::word&) [with Type = Foam::Vector<double>; GeoMesh = Foam::volMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/DimensionedField.C:112:9:   required from ‘Foam::DimensionedField<Type, GeoMesh>::DimensionedField(const Foam::IOobject&, const Mesh&, const Foam::dimensioned<Type>&, bool) [with Type = Foam::Vector<double>; GeoMesh = Foam::volMesh; Foam::DimensionedField<Type, GeoMesh>::Mesh = Foam::fvMesh]’
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/GeometricField.C:252:58:   required from ‘Foam::GeometricField<Type, PatchField, GeoMesh>::GeometricField(const Foam::IOobject&, const Mesh&, const Foam::dimensioned<Type>&, const Foam::word&) [with Type = Foam::Vector<double>; PatchField = Foam::fvPatchField; GeoMesh = Foam::volMesh; Foam::GeometricField<Type, PatchField, GeoMesh>::Mesh = Foam::fvMesh]’
-./createFields.H:81:5:   required from here
+./createFields.H:81:1:   required from here
 /home/yue/OpenFOAM/OpenFOAM-6/src/OpenFOAM/lnInclude/LList.H:302:50: warning: implicitly-declared ‘constexpr Foam::SLListBase::const_iterator::const_iterator(const Foam::SLListBase::const_iterator&)’ is deprecated [-Wdeprecated-copy]
   302 |                 LListBase_const_iterator(baseIter)
       |                                                  ^

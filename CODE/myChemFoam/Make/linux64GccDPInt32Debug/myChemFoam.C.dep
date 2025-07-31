@@ -2,6 +2,7 @@ $(OBJECTS_DIR)/myChemFoam.C.dep: \
 myChemFoam.C \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvCFD.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/rhoReactionThermo.H \
+$(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/psiReactionThermo.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/BasicChemistryModel.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/reactingMixture.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/chemistrySolver.H \
@@ -55,6 +56,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/timeSelector.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/rhoThermo.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/runTimeSelectionTables.H \
+$(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/psiThermo.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/basicChemistryModel.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/BasicChemistryModel.C \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/BasicChemistryModelI.H \
@@ -91,7 +93,6 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedScalar.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFieldsFwd.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/pressureControlI.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/solidThermo/lnInclude/solidReactionThermo.H \
-$(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/psiReactionThermo.H \
 /home/yue/Cases/particleCodeAndExamples/lib/mySolidChemistryModel/lnInclude/myBasicSolidChemistryModelI.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/specie/lnInclude/hPowerThermo.H \
 /home/yue/Cases/particleCodeAndExamples/lib/mySolidSpecie/lnInclude/constIsoSolidTransport.H \
@@ -259,7 +260,6 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvOptionListTemplates.C \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedType.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedScalarFwd.H \
-$(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/psiThermo.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/specie/lnInclude/hPowerThermoI.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/specie/lnInclude/hPowerThermo.C \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/vector.H \
@@ -877,6 +877,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Barycentric2DI.H \
 
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvCFD.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/rhoReactionThermo.H :
+$(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/psiReactionThermo.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/BasicChemistryModel.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/reactingMixture.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/chemistrySolver.H :
@@ -930,6 +931,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/timeSelector.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/rhoThermo.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/runTimeSelectionTables.H :
+$(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/psiThermo.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/basicChemistryModel.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/BasicChemistryModel.C :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/chemistryModel/lnInclude/BasicChemistryModelI.H :
@@ -966,7 +968,6 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedScalar.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFieldsFwd.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/pressureControlI.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/solidThermo/lnInclude/solidReactionThermo.H :
-$(WM_PROJECT_DIR)/src/thermophysicalModels/reactionThermo/lnInclude/psiReactionThermo.H :
 /home/yue/Cases/particleCodeAndExamples/lib/mySolidChemistryModel/lnInclude/myBasicSolidChemistryModelI.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/specie/lnInclude/hPowerThermo.H :
 /home/yue/Cases/particleCodeAndExamples/lib/mySolidSpecie/lnInclude/constIsoSolidTransport.H :
@@ -1134,7 +1135,6 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvOptionListTemplates.C :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedType.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedScalarFwd.H :
-$(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/psiThermo.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/specie/lnInclude/hPowerThermoI.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/specie/lnInclude/hPowerThermo.C :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/vector.H :
